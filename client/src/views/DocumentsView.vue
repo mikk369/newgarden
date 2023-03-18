@@ -8,39 +8,34 @@
           <div>
             <a
               href="https://documents.pailasteaed.ee/2022-2023-tegevuskava.pdf"
-              target="_blank"
-            >
+              target="_blank">
               <button class="link-background-hover">Tegevuskava</button>
             </a>
           </div>
           <div>
             <a
               href="https://documents.pailasteaed.ee/kodukord-2022.pdf"
-              target="_blank"
-            >
+              target="_blank">
               <button class="link-background-hover">Kodukord</button>
             </a>
           </div>
           <div>
             <a
               href="https://documents.pailasteaed.ee/Oppekava.pdf"
-              target="_blank"
-            >
+              target="_blank">
               <button class="link-background-hover">Õppekava</button>
             </a>
           </div>
           <div>
             <a
               href="https://documents.pailasteaed.ee/Paevakava-2022-2023.pdf"
-              target="_blank"
-            >
+              target="_blank">
               <button class="link-background-hover">Päevakava</button>
             </a>
           </div>
           <a
             href="https://documents.pailasteaed.ee/Lapse-lasteaiakoha-lopetamise-avalduse-pohi.docx"
-            target="_blank"
-          >
+            target="_blank">
             <button class="link-background-hover">
               Lapse lasteaiakoha lopetamise avalduse pohi
             </button>
@@ -48,8 +43,8 @@
         </div>
       </div>
     </div>
+    <FooterView />
   </div>
-  <FooterView />
 </template>
 
 <script>
@@ -67,9 +62,14 @@ export default {
   margin: 100px 0 50px 0;
 }
 .links-wrapper {
-  height: 86vh;
+  height: 100vh;
   background-image: url('./../photos/background-2.webp');
   background-size: cover;
+}
+@media screen and (max-width: 600px) {
+  .links-wrapper {
+    margin-bottom: 100px;
+  }
 }
 .links-wrapper a {
   border: none;

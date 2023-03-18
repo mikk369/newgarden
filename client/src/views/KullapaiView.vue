@@ -15,8 +15,7 @@
           class="contact-card-image"
           src="./../photos/Paide_lasteaed_logo4.png"
           alt="Jane"
-          style="max-width: 100%"
-        />
+          style="max-width: 100%" />
         <br />
         <h3>Tuulepai</h3>
         <p>Õpetaja: Triinu</p>
@@ -29,8 +28,7 @@
           class="contact-card-image"
           src="./../photos/Paide_lasteaed_logo4.png"
           alt="Jane"
-          style="max-width: 100%"
-        />
+          style="max-width: 100%" />
         <br />
         <h3>Vihmapai</h3>
         <p>Õpetaja: Ülli</p>
@@ -43,8 +41,7 @@
           class="contact-card-image"
           src="./../photos/Paide_lasteaed_logo4.png"
           alt="Jane"
-          style="max-width: 100%"
-        />
+          style="max-width: 100%" />
         <br />
         <h3>Tähepai</h3>
         <p>Õpetaja: Eveli</p>
@@ -57,8 +54,7 @@
           class="contact-card-image"
           src="./../photos/Paide_lasteaed_logo4.png"
           alt="Jane"
-          style="max-width: 100%"
-        />
+          style="max-width: 100%" />
         <br />
         <h3>Päikesepai</h3>
         <p>Õpetaja: Moonika</p>
@@ -71,8 +67,7 @@
           class="contact-card-image"
           src="./../photos/Paide_lasteaed_logo4.png"
           alt="Jane"
-          style="max-width: 100%"
-        />
+          style="max-width: 100%" />
         <br />
         <h3>Vikerkaarepai</h3>
         <p>Õpetaja: Irma</p>
@@ -85,8 +80,7 @@
           class="contact-card-image"
           src="./../photos/Paide_lasteaed_logo4.png"
           alt="Jane"
-          style="max-width: 100%"
-        />
+          style="max-width: 100%" />
         <br />
         <h3>Pilvepai</h3>
         <p>Õpetaja: Aili</p>
@@ -119,15 +113,35 @@ export default {
   padding-top: 100px;
 }
 
-.kullapai {
-  font-size: 30px;
-  font-weight: 900;
-}
 .lillepai button {
+  border: none;
+  background-color: aliceblue;
+  padding: 9px;
+  border-radius: 9px;
+  font-size: 30px;
+  font-weight: bold;
   color: rgb(39, 39, 39);
+}
+.lillepai button:hover {
+  cursor: pointer;
+  box-shadow: 0 0px 3px 1px rgba(31, 31, 31, 0.3);
+  transition: all 200ms ease-out;
 }
 .kullapai button {
+  margin-left: 9px;
+  border: none;
+  background-color: aliceblue;
   color: rgb(39, 39, 39);
+
+  padding: 9px;
+  border-radius: 9px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.kullapai button:hover {
+  cursor: pointer;
+  box-shadow: 0 0px 3px 1px rgba(31, 31, 31, 0.3);
+  transition: all 200ms ease-out;
 }
 /* grid area  */
 .card-area {
@@ -144,6 +158,18 @@ export default {
   margin: auto;
   padding: 9px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+.card img {
+  margin-bottom: 20px;
+}
+h3 {
+  font-size: 1.75rem;
+  margin-bottom: 9px;
+}
+p {
+  margin-bottom: 16px;
+  line-height: 1.5;
 }
 /* changes grid to 3 column when screen size 770px */
 @media screen and (max-width: 770px) {

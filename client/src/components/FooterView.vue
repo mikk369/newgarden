@@ -5,8 +5,7 @@
       12 515
       <a
         target="_blank"
-        href="https://www.facebook.com/PAIde-Lasteaed-142586803092495"
-      >
+        href="https://www.facebook.com/PAIde-Lasteaed-142586803092495">
         <img class="svg-image" src="./../assets/FbIcon.svg" alt="svg image"
       /></a>
     </h6>
@@ -21,6 +20,7 @@ footer h6 {
   align-items: center;
   justify-content: center;
   color: rgb(39, 39, 39);
+  font-size: 1rem;
 }
 
 .svg-image {

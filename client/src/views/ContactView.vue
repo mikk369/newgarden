@@ -2,9 +2,7 @@
   <div id="app">
     <HeaderView />
     <div class="main-card-area">
-      <div
-        class="main-contact-container d-flex flex-column flex-sm-row text-center"
-      >
+      <div class="main-contact-container">
         <router-link to="/kontaktid" class="main-contact">
           <button>Personal</button>
         </router-link>
@@ -19,8 +17,7 @@
             class="contact-card-image"
             src="./../photos/Grisly.webp"
             alt="Jane"
-            style="max-width: 100%"
-          />
+            style="max-width: 100%" />
           <h3>Grisly Kuuskler</h3>
           <p class="title">Direktor</p>
           <p>Telefon1: 5512 515</p>
@@ -32,8 +29,7 @@
             class="contact-card-image"
             src="./../photos/Sirje.webp"
             alt="Jane"
-            style="width: 100%"
-          />
+            style="width: 100%" />
           <h3>Sirje Kroonsaare</h3>
           <p class="title">Õppealajuhataja</p>
           <p>Telefon1: 58376309</p>
@@ -45,8 +41,7 @@
             class="contact-card-image"
             src="./../photos/Gelit.webp"
             alt="Jane"
-            style="width: 100%"
-          />
+            style="width: 100%" />
           <h3>Gelit Kivisalu</h3>
           <p class="title">Õppealajuhataja</p>
           <p>Telefon1: 55581527</p>
@@ -58,8 +53,7 @@
             class="contact-card-image"
             src="./../photos/Rita.webp"
             alt="Jane"
-            style="width: 100%"
-          />
+            style="width: 100%" />
           <h3>Rita Liiver</h3>
           <p class="title">muusikaõpetaja</p>
         </div>
@@ -68,8 +62,7 @@
             class="contact-card-image"
             src="./../photos/Eva.webp"
             alt="Jane"
-            style="width: 100%"
-          />
+            style="width: 100%" />
           <h3>Eva Uibopuu</h3>
           <p class="title">Liikumisõpetaja Kullapais</p>
           <p>eva.uibopuu@pailasteaed.ee</p>
@@ -79,8 +72,7 @@
             class="contact-card-image"
             src="./../photos/jaana.webp"
             alt="Jane"
-            style="width: 100%"
-          />
+            style="width: 100%" />
           <h3>Jaana Kaju</h3>
           <p class="title">Liikumisõpetaja Lillepais</p>
 
@@ -91,8 +83,7 @@
             class="contact-card-image"
             src="./../photos/Maive.webp"
             alt="Jane"
-            style="width: 100%"
-          />
+            style="width: 100%" />
           <h3>Maive Loorits</h3>
           <p class="title">Muusikaõpetaja</p>
 
@@ -109,8 +100,7 @@
             class="contact-card-image"
             src="./../photos/jane.webp"
             alt="Jane"
-            style="width: 100%"
-          />
+            style="width: 100%" />
           <h3>Jane Sihvart</h3>
           <p class="title">Eripedagoog Lillepais</p>
           <p>Tallinna tn 49</p>
@@ -121,8 +111,7 @@
             class="contact-card-image"
             src="./../photos/Helen.webp"
             alt="Jane"
-            style="width: 100%"
-          />
+            style="width: 100%" />
           <h3>Helen Schvede</h3>
           <p class="title">Mänguterapeut</p>
           <p>Esmaspäeval Kullapais</p>
@@ -134,8 +123,7 @@
             class="contact-card-image"
             src="./../photos/Maarja.webp"
             alt="Jane"
-            style="width: 100%"
-          />
+            style="width: 100%" />
           <h3>Maarja Toomväli</h3>
           <p class="title">Eripedagoog Kullapais</p>
           <p>Kastani 6</p>
@@ -146,8 +134,7 @@
             class="contact-card-image"
             src="./../photos/Eva_lindermann.webp"
             alt="Jane"
-            style="width: 100%"
-          />
+            style="width: 100%" />
           <h3>Eva Lindermann</h3>
           <p class="title">Kõneterapeut</p>
           <p>Esmaspäeval ja teisipäeval Lillepais</p>
@@ -177,10 +164,15 @@ export default {
 .main-contact-container {
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 @media screen and (max-width: 425px) {
   .main-contact {
     margin-bottom: 30px;
+  }
+  .main-contact-container {
+    flex-direction: column;
+    align-items: center;
   }
 }
 .main-contact button {
