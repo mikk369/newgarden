@@ -91,6 +91,7 @@ export default {
   border-radius: 9px;
   background-color: aliceblue;
   font-size: 23px;
+  color: rgb(36, 36, 36);
 }
 .link-background-hover:hover {
   box-shadow: 0 0px 3px 1px rgba(31, 31, 31, 0.3);
