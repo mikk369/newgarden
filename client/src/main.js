@@ -9,7 +9,7 @@ import 'aos/dist/aos.css';
 
 const app = createApp(App);
 app.use(VueGtag, {
-  config: { id: 'G-KRHQER0986' },
+  config: { id: 'G-2SYHWYQ5K5' },
 });
 app.use(router);
 app.component('FooterView', FooterView);
