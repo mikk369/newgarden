@@ -34,8 +34,7 @@
         class="principles-main"
         data-aos="fade-right"
         data-aos-offset="300"
-        data-aos-easing="ease-in-sine"
-      >
+        data-aos-easing="ease-in-sine">
         <div class="princible-text">
           <h1>PAI IGASSE PÄEVA!</h1>
           <p class="paragraph-class">
@@ -59,15 +58,13 @@
         </div>
         <div class="support-div">
           <img
-            src="./../photos/Tervislik_töökoht.webp"
-            alt="Tervislik_töökoht"
-          />
+            src="./../photos/Tervislik_tookoht.webp"
+            alt="Tervislik_töökoht" />
         </div>
         <div class="support-div">
           <img
             src="./../photos/ettevotlik-lasteaed_baastase_logo.webp"
-            alt="ettevotlik-lasteaed"
-          />
+            alt="ettevotlik-lasteaed" />
         </div>
       </div>
       <div class="heading">
@@ -121,8 +118,6 @@ export default {
 </script>
 
 <style scoped>
-/* removes default box sizing and margin,padding */
-
 .landing-bg {
   position: relative;
 }
@@ -238,19 +233,18 @@ export default {
   padding-top: 20px;
   font-weight: 600;
   font-size: 2.5rem;
-  color: rgb(39, 39, 39);
+  color: #000;
 }
-.principles-logo {
-  color: rgb(39, 39, 39);
-}
+
 /* principles-logo sizes  */
 .principles-logo img {
   height: 100px;
-  color: rgb(39, 39, 39);
+  width: 100px;
 }
+
 /* principles-logo lower text  */
 .principles-logo h4 {
-  color: rgb(39, 39, 39);
+  color: #000;
   text-align: center;
   font-weight: 700;
   font-size: 1.5rem;
@@ -279,7 +273,7 @@ export default {
 }
 .princible-text h1 {
   font-weight: 600;
-  color: rgb(39, 39, 39);
+  color: #000;
 }
 /* lower paragraph text  */
 .princible-text p {
@@ -329,7 +323,7 @@ export default {
 .support-div h4 {
   margin-top: 20px;
   font-weight: 500;
-  color: rgb(39, 39, 39);
+  color: #000;
 }
 
 /* landingpage background image  */
@@ -348,7 +342,7 @@ export default {
   padding: 30px;
 }
 .heading h1 {
-  color: rgb(39, 39, 39);
+  color: #000;
 }
 /* news cards positioning  */
 .news-main {

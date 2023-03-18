@@ -1,35 +1,30 @@
 <template>
   <div class="header-view">
-    <nav class="navbar">
-      <router-link to="/">
-        <img
-          class="logo"
-          src="./../photos/Paide_lasteaed_logo4.png"
-          href="/"
-          alt="PAIlasteaed logo"
-        />
-      </router-link>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-text-color">
+      <img
+        class="logo"
+        src="./../photos/Paide_lasteaed_logo4.png"
+        alt="PAIlasteaed logo" />
       <div
         class="navbar-toggle"
         @click="toggleMenu"
-        :class="{ 'is-active': showX }"
-      >
+        :class="{ 'is-active': showX }">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </div>
       <div class="nav-wrapper">
         <ul class="navbar-nav">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link link-color-one" href="/">Avaleht</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link link-color-one" href="/kontaktid">Kontaktid</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link link-color-one" href="/groups">Rühmad</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link link-color-one" href="/dokumendid">Dokumendid</a>
           </li>
           <li class="nav-item active">
@@ -67,31 +62,37 @@ export default {
 };
 </script>
 <style>
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 9px 16px 9px 16px;
+@media only screen and (min-width: 1024px) {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 16px 9px 16px;
+  }
+}
+.navbar-toggle {
+  display: none;
 }
 @media only screen and (max-width: 1024px) {
+  .navbar-toggle {
+    display: block;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+  .navbar {
+    padding: 9px 16px 9px 16px;
+  }
   .nav-wrapper {
     display: none;
-    position: absolute;
     transition: top 0.3s ease-in-out;
-  }
-  .nav-wrapper.show {
-    top: 14.5%;
-    left: 0;
-    background-color: aliceblue;
-    z-index: 1;
-    width: 100%;
   }
   .navbar-nav {
     display: flex;
     align-items: center;
     padding: 20px;
     flex-direction: column;
-    line-height: 2.5rem;
+    line-height: 3.5rem;
   }
 }
 .nav-wrapper.show {
@@ -107,25 +108,12 @@ export default {
   display: flex;
   list-style: none;
 }
-.navbar-toggle {
-  display: none;
-}
-@media screen and (max-width: 1024px) {
-  .navbar-toggle {
-    display: block;
-  }
-}
-.link-color-one {
-  color: rgb(39, 39, 39) !important ;
-}
 
+.link-color-one {
+  color: rgb(39, 39, 39);
+}
 .header-view {
   background-color: aliceblue;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
 }
 
 .navbar-toggle .bar {

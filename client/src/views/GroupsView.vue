@@ -12,7 +12,7 @@
       </div>
       <div class="princible-main-text">
         <div class="princible-text">
-          <p class="bg-light rounded">
+          <p>
             Lasteaias on 13 rühma. Seitse rühma asub Lillepai õppekohas
             (Tallinna tn 49) ja kuus rühma Kullapai õppekohas (Kastani tn 6).
           </p>
@@ -77,6 +77,11 @@
   justify-content: center;
   padding-top: 100px;
   font-weight: 600;
+}
+.princible-text p {
+  background-color: aliceblue;
+  padding: 9px;
+  border-radius: 9px;
 }
 .image-main-container {
   display: flex;
