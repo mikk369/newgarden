@@ -19,10 +19,10 @@
         </div>
       </div>
       <div class="image-main-container">
-        <div class="image-left col-md-4 text-center img-fluid">
+        <div class="image-left">
           <img src="./../photos/kite-kid-1.webp" alt="kid-with-yellow-kite" />
         </div>
-        <div class="image-right col-md-4 text-center">
+        <div class="image-right">
           <img src="./../photos/kite-kids.webp" alt="kids-jumping" />
         </div>
       </div>

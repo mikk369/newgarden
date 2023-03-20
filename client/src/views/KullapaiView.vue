@@ -94,7 +94,7 @@
   </div>
 </template>
 
-<script scoped>
+<script>
 export default {
   name: 'ContactView',
   data() {

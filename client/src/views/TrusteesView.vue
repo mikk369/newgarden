@@ -1,9 +1,7 @@
 <template>
   <div class="trustee-contact">
     <HeaderView />
-    <div
-      class="main-contact-wrapper d-flex flex-column flex-sm-row text-center"
-    >
+    <div class="main-contact-wrapper">
       <router-link to="/kontaktid" class="main-contact-personal">
         <button>Personal</button>
       </router-link>
@@ -129,14 +127,6 @@ export default {
   data() {
     return {};
   },
-  methods: {
-    // compare if its already on that route if not then push otherwise getting already on route error
-    navigateTo(path) {
-      if (this.$route.path !== path) {
-        this.$router.push(path);
-      }
-    },
-  },
 };
 </script>
 
@@ -145,7 +135,7 @@ export default {
 .main-contact-wrapper {
   display: flex;
   align-items: center;
-  padding: 100px 0px 0px 0px;
+  padding-top: 100px;
   justify-content: center;
 }
 @media screen and (max-width: 425px) {
