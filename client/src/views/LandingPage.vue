@@ -36,7 +36,7 @@
         data-aos-offset="300"
         data-aos-easing="ease-in-sine">
         <div class="princible-text">
-          <h1>PAI IGASSE PÄEVA!</h1>
+          <h1 class="paragraph-heading">PAI IGASSE PÄEVA!</h1>
           <p class="paragraph-class">
             Lasteaed võimaldab kvaliteetset ning nüüdisaegset alushariduse
             teenust kõigile Paide linna lastele. Igapäevategevuste planeerimisel
@@ -130,7 +130,7 @@ export default {
   top: 20rem;
   left: 20rem;
   position: absolute;
-  border: solid black 1px;
+  border: none;
   color: rgb(255, 255, 255);
   padding: 10px;
   background-color: rgba(19, 19, 19, 0.6);
@@ -139,6 +139,9 @@ export default {
   letter-spacing: 3px;
   font-weight: 900;
   font-size: inherit;
+}
+.app-button:hover {
+  background-color: rgba(19, 19, 19, 0.8);
 }
 
 /* makes the transperent button to move when smalles screen  */
@@ -261,6 +264,9 @@ export default {
   flex-direction: column;
   display: flex;
   width: 65%;
+}
+.princible-text h1 {
+  margin-bottom: 19px;
 }
 .paragraph-class {
   line-height: 1.6;
