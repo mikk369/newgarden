@@ -149,14 +149,6 @@
 <script scoped>
 export default {
   name: 'ContactView',
-  methods: {
-    // compare if its already on that route if not then push otherwise getting already on route error
-    navigateTo(path) {
-      if (this.$route.path !== path) {
-        this.$router.push(path);
-      }
-    },
-  },
 };
 </script>
 
@@ -164,7 +156,7 @@ export default {
 .main-contact-container {
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  padding-top: 100px;
 }
 @media screen and (max-width: 425px) {
   .main-contact {
@@ -236,9 +228,6 @@ export default {
   }
 }
 /* //so cards wont be behind the heander nav cause position: fixed */
-.main-card-area {
-  padding-top: 100px;
-}
 
 /* card image upper corners rounded  */
 .card img {
