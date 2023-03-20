@@ -11,7 +11,7 @@
     </h6>
   </footer>
 </template>
-<style>
+<style scoped>
 footer h6 {
   margin: 0;
   padding: 10px;
