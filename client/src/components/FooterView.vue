@@ -2,7 +2,7 @@
   <footer>
     <h6>
       PAIde lasteaed Kastani 6, Paide 72718, direktor@pailasteaed.ee, Telefon 55
-      12 515
+      12 515, <span class="year">{{ currentYear }}</span>
       <a
         target="_blank"
         href="https://www.facebook.com/PAIde-Lasteaed-142586803092495">
@@ -34,7 +34,15 @@ footer h6 {
 export default {
   name: 'FooterView',
   data() {
-    return {};
+    return {
+      currentYear: new Date().getFullYear(),
+    };
   },
 };
 </script>
+
+<style scoped>
+.year {
+  margin-left: 9px;
+}
+</style>
