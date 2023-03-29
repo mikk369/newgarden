@@ -201,7 +201,7 @@ export default {
 /* grid area  */
 .card-area {
   display: grid;
-  gap: 30px;
+  gap: 90px;
   padding: 100px 0px 100px 0px;
   justify-content: center;
   grid-template-columns: repeat(3, 1fr);
