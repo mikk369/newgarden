@@ -48,15 +48,7 @@
           <p>lillepai@pailasteaed.ee</p>
           <p>(Osakoormusega)</p>
         </div>
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/Rita.webp"
-            alt="Jane"
-            style="width: 100%" />
-          <h3>Rita Liiver</h3>
-          <p class="title">muusikaõpetaja</p>
-        </div>
+
         <div class="card">
           <img
             class="contact-card-image"
@@ -88,6 +80,15 @@
           <p class="title">Muusikaõpetaja</p>
 
           <p>maive.loorits@pailasteaed.ee</p>
+        </div>
+        <div class="card">
+          <img
+            class="contact-card-image"
+            src="./../photos/Rita.webp"
+            alt="Jane"
+            style="width: 100%" />
+          <h3>Rita Liiver</h3>
+          <p class="title">muusikaõpetaja</p>
         </div>
       </div>
       <div class="support-wrapper">
@@ -181,10 +182,7 @@ export default {
   transition: all 200ms ease-out;
 }
 /* CONTACT CARDS  */
-.contact-links {
-  align-items: center;
-  display: flex;
-}
+
 /* margin for hoolekogu button  */
 .contact-Hoolekogu button {
   margin-left: 9px;
@@ -213,21 +211,24 @@ export default {
 /* sets margin top to card elements  */
 .card {
   margin: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 250px;
+  text-align: center;
+  background-color: #fff;
+  line-height: 2rem;
 }
-
 /* changes grid to 2 column when screen size 770px */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 75rem) {
   .card-area {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 /* changes grid to 1 column when screen size 770px */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 50rem) {
   .card-area {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-/* //so cards wont be behind the heander nav cause position: fixed */
 
 /* card image upper corners rounded  */
 .card img {
@@ -235,13 +236,6 @@ export default {
 }
 h3 {
   font-size: 1.75rem;
-}
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 250px;
-  text-align: center;
-  background-color: #fff;
-  line-height: 2rem;
 }
 
 /* card title  */
