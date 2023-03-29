@@ -6,40 +6,41 @@
         <h1 class="title">Dokumendid</h1>
         <div class="just-links">
           <div>
-            <a
-              href="https://documents.pailasteaed.ee/2022-2023-tegevuskava.pdf"
-              target="_blank">
+            <a href="https://documents.pailasteaed.ee/2022-2023-tegevuskava.pdf" target="_blank">
               <button class="link-background-hover">Tegevuskava</button>
             </a>
           </div>
           <div>
-            <a
-              href="https://documents.pailasteaed.ee/kodukord-2022.pdf"
-              target="_blank">
+            <a href="https://documents.pailasteaed.ee/kodukord-2022.pdf" target="_blank">
               <button class="link-background-hover">Kodukord</button>
             </a>
           </div>
           <div>
-            <a
-              href="https://documents.pailasteaed.ee/Oppekava.pdf"
-              target="_blank">
+            <a href="https://documents.pailasteaed.ee/Oppekava.pdf" target="_blank">
               <button class="link-background-hover">Õppekava</button>
             </a>
           </div>
           <div>
-            <a
-              href="https://documents.pailasteaed.ee/Paevakava-2022-2023.pdf"
-              target="_blank">
+            <a href="https://documents.pailasteaed.ee/Paevakava-2022-2023.pdf" target="_blank">
               <button class="link-background-hover">Päevakava</button>
             </a>
           </div>
-          <a
-            href="https://documents.pailasteaed.ee/Lapse-lasteaiakoha-lopetamise-avalduse-pohi.docx"
-            target="_blank">
-            <button class="link-background-hover">
-              Lapse lasteaiakoha lopetamise avalduse pohi
-            </button>
-          </a>
+          <div>
+            <a
+              href="https://documents.pailasteaed.ee/Paide_lasteaia_arengukava_2023-2027.docx"
+              target="_blank">
+              <button class="link-background-hover">Arengukava</button>
+            </a>
+          </div>
+          <div>
+            <a
+              href="https://documents.pailasteaed.ee/Lapse-lasteaiakoha-lopetamise-avalduse-pohi.docx"
+              target="_blank">
+              <button class="link-background-hover">
+                Lapse lasteaiakoha lopetamise avalduse pohi
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
