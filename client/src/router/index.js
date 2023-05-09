@@ -48,11 +48,11 @@ const routes = [
     name: 'History',
     component: () => import('./../views/HistoryView.vue'),
   },
-  //   {
-  //     path: '/post/:id',
-  //     name: 'post',
-  //     component: () => import('./../views/PostView.vue'),
-  //   },
+  {
+    path: '/post/:id',
+    name: 'post',
+    component: () => import('./../views/PostView.vue'),
+  },
   //   {
   //     path: '/admin',
   //     name: 'Login',
