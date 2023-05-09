@@ -1,13 +1,16 @@
 <template>
   <div class="post-view">
     <HeaderView />
-    <div class="post-container" v-for="post in posts" :key="post.id">
+    <div class="post-container">
       <div class="post-wrapper">
         <div class="post-area">
-          <h1 class="post-title">{{ post.title }}</h1>
-          <p class="content" v-html="post.content"></p>
+          <h1 class="post-title">{{ title }}</h1>
+          <p class="content" v-html="content"></p>
+          <div class="image-wrapper">
+            <img v-if="id !== 1" class="poster-image" :src="image" alt="Post Image" />
+          </div>
         </div>
-        <div class="table-wrapper">
+        <div class="table-wrapper" v-if="id !== 2">
           <table>
             <thead>
               <tr>
@@ -147,11 +150,25 @@ export default {
   name: 'LandingPage',
   data() {
     return {
-      posts: [],
+      post: null,
+      id: '',
+      title: '',
+      content: '',
+      image: '',
     };
   },
   created() {
-    this.posts = posts;
+    try {
+      const postId = parseInt(this.$route.params.id);
+      const post = posts.find((post) => post.id === postId);
+      (this.title = post.title),
+        (this.content = post.content),
+        (this.image = post.image),
+        (this.id = post.id);
+      console.log(post.id);
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 </script>
@@ -186,7 +203,7 @@ export default {
 
 @media only screen and (max-width: 1200px) {
   .post-area {
-    padding: 3rem 3rem;
+    padding: 5rem 3rem;
   }
 }
 @media only screen and (max-width: 900px) {
@@ -199,6 +216,9 @@ export default {
   .content {
     font-size: 1.2rem;
   }
+  .image-wrapper img {
+    width: 400px;
+  }
 }
 @media only screen and (max-width: 380px) {
   .post-title {
@@ -210,6 +230,24 @@ export default {
   .content {
     font-size: 1rem;
   }
+}
+@media only screen and (max-width: 500px) {
+  .post-title {
+    font-size: 1.2rem;
+  }
+  .image-wrapper img {
+    width: 200px;
+  }
+}
+.image-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+.poster-image {
+  width: 600px;
+  height: auto;
+  align-items: center;
 }
 .table-wrapper {
   overflow-x: auto;
