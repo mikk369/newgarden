@@ -354,6 +354,11 @@ export default {
   grid-gap: 1rem;
   grid-template-columns: repeat(3, 1fr);
 }
+@media screen and (max-width: 950px) {
+  .news-main {
+    grid-template-columns: 1fr;
+  }
+}
 /* "card" effect  */
 .paragraph-card {
   /* Add shadows to create the "card" effect */
