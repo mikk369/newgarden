@@ -75,6 +75,7 @@
                 <b>{{ post.title }}</b>
               </h4>
               <p class="lower-paragraph" v-html="post.content"></p>
+              <img class="poster-image" v-if="post.id === 2" :src="post.image" alt="Post Image" />
             </div>
           </router-link>
           <div class="time-div">
@@ -359,9 +360,16 @@ export default {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 9px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 /* card text padding  */
 .cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   padding: 20px;
 }
 
@@ -370,7 +378,7 @@ p {
   color: black;
 }
 .cards h4 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   padding-bottom: 2.3rem;
 }
 .cards p {
@@ -387,9 +395,15 @@ p {
 .lower-paragraph p {
   margin-bottom: 20px;
 }
+.poster-image {
+  background-size: cover;
+  height: 150px;
+  width: 150px;
+}
 /* very bottom of the card  */
 .time-div {
   padding: 9px 9px 9px 18px;
+  bottom: 0;
 }
 .createdAt {
   padding: 9px;
