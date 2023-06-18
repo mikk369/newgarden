@@ -39,6 +39,11 @@ const routes = [
     component: () => import('./../views/KullapaiView.vue'),
   },
   {
+    path: '/projektid',
+    name: 'Projektid',
+    component: () => import('./../views/projectsView.vue'),
+  },
+  {
     path: '/dokumendid',
     name: 'Documents',
     component: () => import('./../views/DocumentsView.vue'),
