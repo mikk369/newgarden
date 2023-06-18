@@ -1,14 +1,8 @@
 <template>
   <div class="header-view">
     <nav class="navbar navbar-expand-lg navbar-light navbar-text-color">
-      <img
-        class="logo"
-        src="./../photos/Paide_lasteaed_logo4.png"
-        alt="PAIlasteaed logo" />
-      <div
-        class="navbar-toggle"
-        @click="toggleMenu"
-        :class="{ 'is-active': showX }">
+      <img class="logo" src="./../photos/Paide_lasteaed_logo4.png" alt="PAIlasteaed logo" />
+      <div class="navbar-toggle" @click="toggleMenu" :class="{ 'is-active': showX }">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
@@ -23,6 +17,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link link-color-one" href="/groups">Rühmad</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-color-one" href="/projektid">Projektid</a>
           </li>
           <li class="nav-item">
             <a class="nav-link link-color-one" href="/dokumendid">Dokumendid</a>
@@ -62,7 +59,7 @@ export default {
 };
 </script>
 <style>
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1200px) {
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -73,7 +70,7 @@ export default {
 .navbar-toggle {
   display: none;
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1200px) {
   .navbar-toggle {
     display: block;
     position: absolute;
