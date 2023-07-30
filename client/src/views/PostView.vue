@@ -6,11 +6,11 @@
         <div class="post-area">
           <h1 class="post-title">{{ title }}</h1>
           <p class="content" v-html="content"></p>
-          <div class="image-wrapper">
+          <!-- <div class="image-wrapper">
             <img v-if="id !== 1" class="poster-image" :src="image" alt="Post Image" />
-          </div>
+          </div> -->
         </div>
-        <div class="table-wrapper" v-if="id !== 2">
+        <div class="table-wrapper" v-if="id !== 1">
           <table>
             <thead>
               <tr>
@@ -165,7 +165,6 @@ export default {
         (this.content = post.content),
         (this.image = post.image),
         (this.id = post.id);
-      console.log(post.id);
     } catch (error) {
       console.log(error);
     }

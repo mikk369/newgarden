@@ -35,6 +35,7 @@
           <p>Telefon1: 58376309</p>
           <p>Telefon2: 6988 922</p>
           <p>oppejuht@pailasteaed.ee</p>
+          <p style="color: red">Puhkusel: 11.08</p>
         </div>
         <div class="card">
           <img

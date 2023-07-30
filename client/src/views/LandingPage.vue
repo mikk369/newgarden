@@ -75,7 +75,7 @@
                 <b>{{ post.title }}</b>
               </h4>
               <p class="lower-paragraph" v-html="post.content"></p>
-              <img class="poster-image" v-if="post.id === 2" :src="post.image" alt="Post Image" />
+              <!-- <img class="poster-image" v-if="post.id === 2" :src="post.image" alt="Post Image" /> -->
             </div>
           </router-link>
           <div class="time-div">
@@ -385,6 +385,7 @@ p {
 .cards h4 {
   font-size: 1.8rem;
   padding-bottom: 2.3rem;
+  text-align: center;
 }
 .cards p {
   font-size: 1.5rem;
@@ -396,6 +397,7 @@ p {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  text-align: center;
 }
 .lower-paragraph p {
   margin-bottom: 20px;
