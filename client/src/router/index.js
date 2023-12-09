@@ -71,8 +71,8 @@ const routes = [
   //   },
   {
     path: '/kontaktideinfo',
-    name: 'EditContactInfo',
-    component: () => import('./../views/EditContactInfo.vue'),
+    name: 'AddContactInfo',
+    component: () => import('./../views/AddContactInfo.vue'),
   },
   {
     path: '/hoolekoguinfo',
