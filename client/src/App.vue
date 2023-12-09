@@ -19,3 +19,5 @@ export default {
   font-family: 'Open Sans', sans-serif;
 }
 </style>
+
+<style src="./assets/index.css"></style>

@@ -10,22 +10,22 @@
       <div class="nav-wrapper">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link link-color-one" href="/">Avaleht</a>
+            <a class="link-color-one" href="/">Avaleht</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-color-one" href="/kontaktid">Kontaktid</a>
+            <a class="link-color-one" href="/kontaktid">Kontaktid</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-color-one" href="/groups">Rühmad</a>
+            <a class="link-color-one" href="/ruhmad">Rühmad</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-color-one" href="/projektid">Projektid</a>
+            <a class="link-color-one" href="/projektid">Projektid</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-color-one" href="/dokumendid">Dokumendid</a>
+            <a class="link-color-one" href="/dokumendid">Dokumendid</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link link-color-one" href="/ajalugu">Ajalugu</a>
+            <a class="link-color-one" href="/ajalugu">Ajalugu</a>
           </li>
         </ul>
       </div>

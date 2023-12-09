@@ -8,11 +8,6 @@ const routes = [
     name: 'LandingPage',
     component: LandingPage,
   },
-  //   {
-  //     path: '/AdminView',
-  //     name: 'AdminView',
-  //     component: AdminView,
-  //   },
   {
     path: '/kontaktid',
     name: 'ContactView',
@@ -24,7 +19,7 @@ const routes = [
     component: () => import('./../views/TrusteesView.vue'),
   },
   {
-    path: '/groups',
+    path: '/ruhmad',
     name: 'Groups',
     component: () => import('./../views/GroupsView.vue'),
   },
@@ -58,6 +53,11 @@ const routes = [
     name: 'post',
     component: () => import('./../views/PostView.vue'),
   },
+  {
+    path: '/admin',
+    name: 'AdminView',
+    component: () => import('./../views/AdminView.vue'),
+  },
   //   {
   //     path: '/admin',
   //     name: 'Login',
@@ -69,21 +69,36 @@ const routes = [
   //     name: 'ProfileView',
   //     component: () => import('./../views/ProfileView.vue'),
   //   },
-  //   {
-  //     path: '/AddContacts',
-  //     name: 'AddContactsView',
-  //     component: () => import('./../views/AddContactsView.vue'),
-  //   },
-  //   {
-  //     path: '/AddGroups',
-  //     name: 'AddGroupsView',
-  //     component: () => import('./../views/AddGroupsView.vue'),
-  //   },
-  //   {
-  //     path: '/AddPosts',
-  //     name: 'AddPostsView',
-  //     component: () => import('./../views/AddPostsView.vue'),
-  //   },
+  {
+    path: '/kontaktideinfo',
+    name: 'EditContactInfo',
+    component: () => import('./../views/EditContactInfo.vue'),
+  },
+  {
+    path: '/hoolekoguinfo',
+    name: 'EditTrusteesInfo',
+    component: () => import('./../views/EditTrusteesInfo.vue'),
+  },
+  {
+    path: '/ruhmadeinfo',
+    name: 'EditGroupsInfo',
+    component: () => import('./../views/EditGroupsInfo.vue'),
+  },
+  {
+    path: '/lisapostitus',
+    name: 'AddPosts',
+    component: () => import('./../views/AddPosts.vue'),
+  },
+  {
+    path: '/projektideinfo',
+    name: 'EditProjectsInfo',
+    component: () => import('./../views/EditProjectsInfo.vue'),
+  },
+  {
+    path: '/dokumentideinfo',
+    name: 'EditDocuments',
+    component: () => import('./../views/EditDocuments.vue'),
+  },
 ];
 
 const router = createRouter({

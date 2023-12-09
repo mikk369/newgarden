@@ -74,7 +74,7 @@
               <h4>
                 <b>{{ post.title }}</b>
               </h4>
-              <p class="lower-paragraph" v-html="post.content"></p>
+              <p class="lower-paragraph">{{ post.content }}</p>
               <!-- <img class="poster-image" v-if="post.id === 2" :src="post.image" alt="Post Image" /> -->
             </div>
           </router-link>
@@ -89,8 +89,7 @@
 </template>
 
 <script>
-// import axios from 'axios';
-import { posts } from './data';
+import axios from 'axios';
 export default {
   name: 'LandingPage',
   data() {
@@ -99,17 +98,11 @@ export default {
     };
   },
 
-  // async created() {
-  //   const response = await axios.get(
-  //     'https://nodetest.themikk.ee/api/v1/posts/',
-  //     {
-  //       withCredentials: true,
-  //     }
-  //   );
-  //   this.posts = response.data.data.posts;
-  // },
-  created() {
-    this.posts = posts;
+  async created() {
+    const response = await axios.get('http://localhost:8000/api/get_allPosts.php', {
+      // withCredentials: true,
+    });
+    this.posts = response.data;
   },
 };
 </script>
@@ -135,7 +128,6 @@ export default {
   cursor: pointer;
   letter-spacing: 3px;
   font-weight: 900;
-  font-size: inherit;
 }
 .app-button:hover {
   background-color: rgba(19, 19, 19, 0.8);
