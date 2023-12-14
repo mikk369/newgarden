@@ -32,7 +32,7 @@ export default {
     fetchPost() {
       // Use Axios to make the GET request
       axios
-        .get(`http://localhost:8000/api/get_post.php?id=${this.id}`)
+        .get(`http://localhost:8000/api/posts/get_post.php?id=${this.id}`)
         .then((response) => {
           // Update component data with fetched post data
           const data = response.data;

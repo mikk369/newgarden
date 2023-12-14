@@ -5,7 +5,8 @@ header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: * ");
 
 // Get db connection
-require_once "../db/db_connect.php";
+require_once '../../db/db_connect.php';
+
 
 // Receive POST data from form with superglobal
     $title = isset($_POST['title']) ? $_POST['title'] : '';

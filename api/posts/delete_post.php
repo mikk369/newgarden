@@ -5,7 +5,7 @@ header("Access-Control-Allow-Methods: *");
 header("Access-Control-Allow-Headers: *");
 
 // Get db connection
-require_once '../db/db_connect.php';
+require_once '../../db/db_connect.php';
 
     // Retrieve the post ID from the request
     $postId = isset($_GET['id']) ? $_GET['id'] : '';

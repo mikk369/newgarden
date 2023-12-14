@@ -5,7 +5,7 @@ header("Access-Control-Allow-Methods: * ");
 header("Access-Control-Allow-Headers: * ");
 
 // Get db connection
-require_once '../db/db_connect.php';
+require_once '../../db/db_connect.php';
 
 // Construct the SQL query using a prepared statement
 $query = "SELECT * FROM posts";

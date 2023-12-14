@@ -38,14 +38,16 @@
         <div class="princible-text">
           <h1 class="paragraph-heading">PAI IGASSE PÄEVA!</h1>
           <p class="paragraph-class">
-            Lasteaed võimaldab kvaliteetset ning nüüdisaegset alushariduse teenust kõigile Paide
-            linna lastele. Igapäevategevuste planeerimisel toetutakse lapsest lähtuvale
-            õpikäsitlusele, fookusesse on seatud projektõpe. Lasteaias tegutseb Paide linna ainus
-            erirühm, mille tähelepanu on kõnepuudega lastele. Laste arengut toetavad lisaks
-            rühmameeskondadele ka tugispetsialistid, mõlemas õppekohas on olemas eripedagoogid,
-            kõne- ja mänguterapeut. Lasteaed tegutseb kahes õppekohas. Mõlemad on ümbritsetud
-            loodusliku keskkonnaga, läheduses asuvad mets, park, järv, vallimägi. Samuti on Kullapai
-            õppekohas ujula, mida kasutavad ujumisõpetuseks kõik rühmad. <br />
+            Lasteaed võimaldab kvaliteetset ning nüüdisaegset alushariduse
+            teenust kõigile Paide linna lastele. Igapäevategevuste planeerimisel
+            toetutakse lapsest lähtuvale õpikäsitlusele, fookusesse on seatud
+            projektõpe. Lasteaias tegutseb Paide linna ainus erirühm, mille
+            tähelepanu on kõnepuudega lastele. Laste arengut toetavad lisaks
+            rühmameeskondadele ka tugispetsialistid, mõlemas õppekohas on olemas
+            eripedagoogid, kõne- ja mänguterapeut. Lasteaed tegutseb kahes
+            õppekohas. Mõlemad on ümbritsetud loodusliku keskkonnaga, läheduses
+            asuvad mets, park, järv, vallimägi. Samuti on Kullapai õppekohas
+            ujula, mida kasutavad ujumisõpetuseks kõik rühmad. <br />
             Meie Lasteaiast sirguvad õnnelikud, julged ja uudishimulikud lapsed!
           </p>
         </div>
@@ -55,17 +57,27 @@
           <img src="./../photos/tervis_logo.webp" alt="tervis_logo" />
         </div>
         <div class="support-div">
-          <img src="./../photos/Tervislik_tookoht.webp" alt="Tervislik_töökoht" />
+          <img
+            src="./../photos/Tervislik_tookoht.webp"
+            alt="Tervislik_töökoht" />
         </div>
         <div class="support-div">
-          <img src="./../photos/ettevotlik-lasteaed_baastase_logo.webp" alt="ettevotlik-lasteaed" />
+          <img
+            src="./../photos/ettevotlik-lasteaed_baastase_logo.webp"
+            alt="ettevotlik-lasteaed" />
         </div>
       </div>
       <div class="heading">
         <h1>Teated</h1>
       </div>
       <div class="news-main">
-        <div class="paragraph-card" v-for="post in posts" :key="post.id">
+        <div class="no-posts-div" v-if="posts.length === 0">
+          <h3>Hetkel teated puuduvad</h3>
+        </div>
+        <div
+          class="paragraph-card"
+          v-for="post in reversedPosts"
+          :key="post.id">
           <router-link
             style="text-decoration: none"
             class="router-styles"
@@ -75,7 +87,6 @@
                 <b>{{ post.title }}</b>
               </h4>
               <p class="lower-paragraph">{{ post.content }}</p>
-              <!-- <img class="poster-image" v-if="post.id === 2" :src="post.image" alt="Post Image" /> -->
             </div>
           </router-link>
           <div class="time-div">
@@ -97,11 +108,20 @@ export default {
       posts: [],
     };
   },
+  computed: {
+    // So new post will be top
+    reversedPosts() {
+      return this.posts.slice().reverse();
+    },
+  },
 
   async created() {
-    const response = await axios.get('http://localhost:8000/api/get_allPosts.php', {
-      // withCredentials: true,
-    });
+    const response = await axios.get(
+      'http://localhost:8000/api/posts/get_allPosts.php',
+      {
+        // withCredentials: true,
+      }
+    );
     this.posts = response.data;
   },
 };
@@ -351,60 +371,51 @@ export default {
     grid-template-columns: 1fr;
   }
 }
-/* "card" effect  */
+.no-posts-div {
+  text-align: center;
+  grid-column: 2;
+  align-self: center;
+}
 .paragraph-card {
-  /* Add shadows to create the "card" effect */
+  white-space: normal;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 9px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin: 10px; /* Add margin for spacing between cards */
 }
-/* card text padding  */
+
 .cards {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   padding: 20px;
+  color: #363636;
 }
 
-.cards h4,
-p {
-  color: black;
-}
-.cards h4 {
-  font-size: 1.8rem;
-  padding-bottom: 2.3rem;
+h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
   text-align: center;
 }
-.cards p {
-  font-size: 1.5rem;
-  line-height: 1.6;
-}
-/* card text paragraph  */
+
 .lower-paragraph {
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   text-align: center;
+  font-size: 1rem;
+  color: #555; /* Set the color as needed */
 }
-.lower-paragraph p {
-  margin-bottom: 20px;
-}
-.poster-image {
-  background-size: cover;
-  height: 150px;
-  width: 150px;
-}
-/* very bottom of the card  */
+
 .time-div {
-  padding: 9px 9px 9px 18px;
-  bottom: 0;
+  background-color: aliceblue; /* Set background color as needed */
+  padding: 10px;
+  text-align: right;
 }
-.createdAt {
-  padding: 9px;
+
+.created-At {
+  font-size: 12px;
+  color: #888; /* Set the color as needed */
 }
 </style>

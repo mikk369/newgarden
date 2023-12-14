@@ -10,136 +10,14 @@
           <button>Hoolekogu</button>
         </router-link>
       </div>
-
       <div class="card-area">
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/Grisly.webp"
-            alt="Jane"
-            style="max-width: 100%" />
-          <h3>Grisly Kuuskler</h3>
-          <p class="title">Direktor</p>
-          <p>Telefon1: 5512 515</p>
-          <p>Telefon2: 6988 921</p>
-          <p>direktor@pailasteaed.ee</p>
-        </div>
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/Sirje.webp"
-            alt="Jane"
-            style="width: 100%" />
-          <h3>Sirje Kroonsaare</h3>
-          <p class="title">Õppealajuhataja</p>
-          <p>Telefon1: 58376309</p>
-          <p>Telefon2: 6988 922</p>
-          <p>oppejuht@pailasteaed.ee</p>
-        </div>
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/Gelit.webp"
-            alt="Jane"
-            style="width: 100%" />
-          <h3>Gelit Kivisalu</h3>
-          <p class="title">Õppealajuhataja</p>
-          <p>Telefon1: 55581527</p>
-          <p>lillepai@pailasteaed.ee</p>
-          <p>(Osakoormusega)</p>
-        </div>
-
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/Eva.webp"
-            alt="Jane"
-            style="width: 100%" />
-          <h3>Eva Uibopuu</h3>
-          <p class="title">Liikumisõpetaja Kullapais</p>
-          <p>eva.uibopuu@pailasteaed.ee</p>
-        </div>
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/jaana.webp"
-            alt="Jane"
-            style="width: 100%" />
-          <h3>Jaana Kaju</h3>
-          <p class="title">Liikumisõpetaja Lillepais</p>
-
-          <p>jaana.hussar@pailasteaed.ee</p>
-        </div>
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/Maive.webp"
-            alt="Jane"
-            style="width: 100%" />
-          <h3>Maive Loorits</h3>
-          <p class="title">Muusikaõpetaja</p>
-
-          <p>maive.loorits@pailasteaed.ee</p>
-        </div>
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/Rita.webp"
-            alt="Jane"
-            style="width: 100%" />
-          <h3>Rita Liiver</h3>
-          <p class="title">muusikaõpetaja</p>
-        </div>
-      </div>
-      <div class="support-wrapper">
-        <h1 class="text-tugimeeskond">Tugimeeskond</h1>
-      </div>
-
-      <div class="card-area">
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/jane.webp"
-            alt="Jane"
-            style="width: 100%" />
-          <h3>Jane Sihvart</h3>
-          <p class="title">Eripedagoog Lillepais</p>
-          <p>Tallinna tn 49</p>
-          <p>jane.sihvart@pailasteaed.ee</p>
-        </div>
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/Helen.webp"
-            alt="Jane"
-            style="width: 100%" />
-          <h3>Helen Schvede</h3>
-          <p class="title">Mänguterapeut</p>
-          <p>Esmaspäeval Kullapais</p>
-          <p>Teisipäeval Lillepais</p>
-          <p>terapeut@pailasteaed.ee</p>
-        </div>
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/Maarja.webp"
-            alt="Jane"
-            style="width: 100%" />
-          <h3>Maarja Toomväli</h3>
-          <p class="title">Eripedagoog Kullapais</p>
-          <p>Kastani 6</p>
-          <p>maarja.toomvali@pailasteaed.ee</p>
-        </div>
-        <div class="card">
-          <img
-            class="contact-card-image"
-            src="./../photos/Eva_lindermann.webp"
-            alt="Jane"
-            style="width: 100%" />
-          <h3>Eva Lindermann</h3>
-          <p class="title">Kõneterapeut</p>
-          <p>Esmaspäeval ja teisipäeval Lillepais</p>
-          <p>Kolmapäeval Kullapais</p>
+        <div class="card" v-for="contact in contacts" :key="contact.id">
+          <img class="contact-card-image" alt="Jane" style="max-width: 100%" />
+          <h3>{{ contact.name }}</h3>
+          <p class="title">{{ contact.jobTitle }}</p>
+          <p>Telefon1: {{ contact.phone_1 }}</p>
+          <p>Telefon2: {{ contact.phone_2 }}</p>
+          <p>{{ contact.email }}</p>
         </div>
       </div>
     </div>
@@ -148,8 +26,20 @@
 </template>
 
 <script scoped>
+import axios from 'axios';
 export default {
   name: 'ContactView',
+  data() {
+    return {
+      contacts: [],
+    };
+  },
+  async created() {
+    const response = await axios.get(
+      'http://localhost:8000/api/contacts/get_allContacts.php'
+    );
+    this.contacts = response.data;
+  },
 };
 </script>
 
@@ -213,6 +103,7 @@ export default {
   margin: auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 250px;
+  width: 250px;
   text-align: center;
   background-color: #fff;
   line-height: 2rem;
