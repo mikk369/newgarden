@@ -2,14 +2,16 @@
   <div class="grid-container">
     <SideBar />
     <main>
-      <form class="edit-contact-info" @submit.prevent="addContact">
+      <form
+        class="edit-contact-info"
+        @submit.prevent="addContact"
+        enctype="multipart/form-data">
         <h1 class="form-heading">Lisa kontakt</h1>
         <div class="form-group">
           <label class="input-label" for="image">Image</label>
           <input
             class="image-input"
             type="file"
-            ref="image"
             name="image"
             show-size
             accept="image/png, image/jpg, image/webp"
@@ -88,6 +90,7 @@ export default {
     return {
       contacts: [],
       id: '',
+      image: '',
       name: '',
       jobTitle: '',
       phone_1: '',
@@ -100,9 +103,13 @@ export default {
     await this.fetchContacts();
   },
   methods: {
+    selectFile(event) {
+      this.image = event.target.files[0];
+    },
     async addContact() {
       try {
         const formData = new FormData();
+        formData.append('image', this.image);
         formData.append('name', this.name);
         formData.append('jobTitle', this.jobTitle);
         formData.append('phone_1', this.phone_1);
@@ -113,6 +120,7 @@ export default {
           'http://localhost:8000/api/contacts/add_contacts.php',
           formData
         );
+        this.image = '';
         this.name = '';
         this.jobTitle = '';
         this.phone_1 = '';

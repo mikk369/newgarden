@@ -14,28 +14,31 @@ $phone_1 = isset($_POST['phone_1']) ? $_POST['phone_1'] : '';
 $phone_2 = isset($_POST['phone_2']) ? $_POST['phone_2'] : '';
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 
+// Ensure phone numbers are set to NULL if empty
+if (empty($phone_1)) {
+    $phone_1 = null;
+}
+
+if (empty($phone_2)) {
+    $phone_2 = null;
+}
+
 // Validation
 if (empty($name) || empty($jobTitle)) {
     $response = ['error' => 'Name and jobTitle are required'];
-} else {
+} 
     // Handle file upload
-    $imagePath = '';
+   if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    $file_tmp = $_FILES["image"]["tmp_name"];
+    $imageFile = basename($_FILES["image"]["name"]);
+    $image = "client/src/photos/" . $imageFile;
 
-    if (!empty($_FILES['image']['name'])) {
-        $parentDir = dirname(__DIR__);  
-        $uploadDir = $parentDir . '/client/src/photos/';
-        $uploadFile = $uploadDir . basename($_FILES['image']['name']);
-    
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
-            // File uploaded successfully, store the path
-            $imagePath = 'client/src/photos/' . basename($_FILES['image']['name']);
-        } else {
-            // Handle the file upload error
-            $response = ['error' => 'File upload failed'];
-            echo json_encode($response);
-            exit;
-        }
-    }
+    move_uploaded_file($file_tmp, "../../$image");
+
+    echo "File uploaded";
+} else {
+    echo "File upload failed";
+}
 
     // Make SQL query
     $query = "INSERT INTO contacts (image, name, jobTitle, phone_1, phone_2, email ) VALUES (?, ?, ?, ?, ?, ?)";
@@ -53,7 +56,7 @@ if (empty($name) || empty($jobTitle)) {
 
     // Close prepared statement
     $stmt->close();
-}
+
 
 // Close connection
 mysqli_close($connection);

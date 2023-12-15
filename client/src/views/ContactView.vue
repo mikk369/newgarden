@@ -12,11 +12,15 @@
       </div>
       <div class="card-area">
         <div class="card" v-for="contact in contacts" :key="contact.id">
-          <img class="contact-card-image" alt="Jane" style="max-width: 100%" />
+          <img
+            class="contact-card-image"
+            :src="'http://localhost:8000/' + contact.image"
+            alt="Jane"
+            style="max-width: 100%" />
           <h3>{{ contact.name }}</h3>
           <p class="title">{{ contact.jobTitle }}</p>
-          <p>Telefon1: {{ contact.phone_1 }}</p>
-          <p>Telefon2: {{ contact.phone_2 }}</p>
+          <p v-if="contact.phone_1">Telefon1: {{ contact.phone_1 }}</p>
+          <p v-if="contact.phone_2">Telefon2: {{ contact.phone_2 }}</p>
           <p>{{ contact.email }}</p>
         </div>
       </div>
