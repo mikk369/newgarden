@@ -66,7 +66,7 @@
             <div class="post-content">{{ contact.name }}</div>
             <div class="post-actions">
               <button @click="editPost(post)" class="edit-button">Muuda</button>
-              <button @click="deletePost(post.id)" class="delete-button">
+              <button @click="deleteContact(contact.id)" class="delete-button">
                 Kustuta
               </button>
             </div>
@@ -126,6 +126,8 @@ export default {
         this.phone_1 = '';
         this.phone_2 = '';
         this.email = '';
+        
+        await this.fetchContacts();
       } catch (error) {
         console.log(error);
       }
@@ -136,6 +138,16 @@ export default {
           'http://localhost:8000/api/contacts/get_allContacts.php'
         );
         this.contacts = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteContact(contactId) {
+      try {
+        await axios.delete(
+          `http://localhost:8000/api/contacts/delete_contact.php?id=${contactId}`
+        );
+        await this.fetchContacts();
       } catch (error) {
         console.log(error);
       }
