@@ -14,6 +14,10 @@ $phone_1 = isset($_POST['phone_1']) ? $_POST['phone_1'] : '';
 $phone_2 = isset($_POST['phone_2']) ? $_POST['phone_2'] : '';
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 
+// remove spaces
+$phone_1 = str_replace(' ', '', $phone_1);
+$phone_2 = str_replace(' ', '', $phone_2);
+
 // Ensure phone numbers are set to NULL if empty
 if (empty($phone_1)) {
     $phone_1 = null;
