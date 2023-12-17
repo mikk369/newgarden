@@ -61,11 +61,11 @@
       </form>
       <section>
         <h1>Lisatud kontaktid</h1>
-        <ul class="all-added-posts">
-          <li class="added-post" v-for="contact in contacts" :key="contact.id">
-            <div class="post-content">{{ contact.name }}</div>
-            <div class="post-actions">
-              <button @click="editPost(post)" class="edit-button">Muuda</button>
+        <ul class="all-added-contacts">
+          <li class="added-contacts" v-for="contact in contacts" :key="contact.id">
+            <div class="contact-content">{{ contact.name }}</div>
+            <div class="contact-actions">
+              <button @click="editContact(contact)" class="edit-button">Muuda</button>
               <button @click="deleteContact(contact.id)" class="delete-button">
                 Kustuta
               </button>
@@ -73,6 +73,58 @@
           </li>
         </ul>
       </section>
+       <!-- Modal for editing a contact -->
+       <div v-if="isModalVisible" class="modal">
+        <div class="modal-wrapper">
+          <h2>Muuda kontakti</h2>
+          <form>
+            <input
+              class="image-input"
+              type="file"
+              name="image"
+              show-size
+              accept="image/png, image/jpg, image/webp"
+              @change="selectFile"
+              />
+              <!-- <div class="preview-img-wrapper">
+                <img
+                class="image-preview"
+                :src="editImage"
+                alt="Preview"
+                 />
+              </div> -->
+            <input
+              type="text"
+              v-model="editName"
+              id="name"
+              placeholder="Nimi" />
+            <input
+              type="text"
+              v-model="editJobtitle"
+              id="jobTitle"
+              placeholder="Ametinimetus" />
+            <input
+              type="text"
+              v-model="editPhone_1"
+              id="name"
+              placeholder="Telefon 1" />
+            <input
+              type="text"
+              v-model="editPhone_2"
+              id="name"
+              placeholder="Telefon 2" />
+            <input
+              type="text"
+              v-model="editEmail"
+              id="name"
+              placeholder="Email" />
+            <button class="save-btn" @click.prevent="updateContact()">
+              Salvesta muudatused
+            </button>
+          </form>
+          <button class="close-btn" @click="closeModal">Sulge</button>
+        </div>
+      </div>
     </main>
   </div>
 </template>
@@ -97,6 +149,12 @@ export default {
       phone_2: '',
       email: '',
       isModalVisible: false,
+      editImage: '',
+      editName : '',
+      editJobtitle: '',
+      editPhone_1: '',
+      editPhone_2: '',
+      editEmail: '',
     };
   },
   async created() {
@@ -152,6 +210,48 @@ export default {
         console.log(error);
       }
     },
+    // Get data to modal 
+      editContact(contact) {
+        this.isModalVisible = true;
+        this.id = contact.id;
+        this.editImage = contact.image;
+        this.editName = contact.name;
+        this.editJobtitle = contact.jobTitle;
+        this.editPhone_1 = contact.phone_1;
+        this.editPhone_2 = contact.phone_2;
+        this.editEmail = contact.email;
+      },
+      async updateContact(){
+        try {
+          const formData = {
+            id: this.id,
+            image: this.editImage,
+            name: this.editName,
+            jobTitle: this.editJobtitle,
+            phone_1: this.editPhone_1,
+            phone_2: this.editPhone_2,
+            email: this.editEmail,
+          };
+          await axios.patch(`http://localhost:8000/api/contacts/update_contact.php?id=${this.id}`, formData);
+          // fetch contacts after updating
+          await this.fetchContacts(); 
+  
+          // close modal after update
+          this.closeModal();
+        } catch (error) {
+          console.log(error)
+        }
+      },
+       // Close the modal
+       closeModal() {
+        this.isModalVisible = false;
+        this.image = '';
+        this.name = '';
+        this.jobTitle = '';
+        this.phone_1 = '';
+        this.phone_2 = '';
+        this.email = '';
+      },
   },
 };
 </script>
@@ -206,12 +306,12 @@ main {
 }
 
 /* added contacts list  */
-.all-added-posts {
+.all-added-contacts {
   list-style-type: none;
   padding: 0;
 }
 
-.added-post {
+.added-contacts {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -221,11 +321,11 @@ main {
   background-color: #f9f9f9;
 }
 
-.post-content {
+.contact-content {
   flex-grow: 1;
 }
 
-.post-actions {
+.contact-actions {
   display: flex;
   gap: 10px;
 }
@@ -257,5 +357,62 @@ main {
 .delete-button:hover,
 .close-btn:hover {
   background-color: rgb(235, 63, 1);
+}
+
+/* //MODAL\\ */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-wrapper {
+  background: white;
+  padding: 20px;
+  border-radius: 9px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.image-preview{
+  /* max-width: 100%; */
+  max-height: 200px;
+ width: 150px;
+}
+
+.modal label {
+  font-weight: bold;
+}
+
+.modal input,
+.modal textarea,
+.modal button {
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
 }
 </style>
