@@ -2,7 +2,7 @@
   <div class="grid-container">
     <SideBar />
     <main>
-      <form class="add-trustee-input-form" @submit.prevent="addTrustees">
+      <form class="add-trustee-input-trustees" @submit.prevent="addTrustees">
         <h1>Lisa hoolekogu liige</h1>
         <div
           v-for="(row, index) in rows"
@@ -18,7 +18,7 @@
             type="text"
             class="add-trustee-form"
             placeholder="Rühm"
-            v-model="row.group_name" />
+            v-model="row.table_group_name" />
           <button class="delete-button" @click.prevent="removeRow(index)">
             X
           </button>
@@ -26,6 +26,24 @@
         <button class="form-button" @click.prevent="addRow">Lisa rida</button>
         <button class="form-button submit-button">Lisa postitus</button>
       </form>
+      <section>
+        <h1>Hoolekogu nimekiri</h1>
+        <ul class="all-added-trustee">
+          <li
+            class="added-trustee"
+            v-for="trustee in trustees"
+            :key="trustee.id">
+            <div class="trustee-content">{{ trustee.name }}</div>
+            <div class="trustee-content">{{ trustee.table_group_name }}</div>
+            <div class="trustee-actions">
+              <button @click="editPost(post)" class="edit-button">Muuda</button>
+              <button @click="deleteTrustee(trustee.id)" class="delete-button">
+                Kustuta
+              </button>
+            </div>
+          </li>
+        </ul>
+      </section>
     </main>
   </div>
 </template>
@@ -40,36 +58,63 @@ export default {
   },
   data() {
     return {
-      rows: [{ name: '', group_name: '' }],
+      rows: [{ name: '', table_group_name: '' }],
+      trustees: [],
     };
+  },
+  async created() {
+    await this.fetchTrustees();
   },
   methods: {
     addRow() {
-      this.rows.push({ name: '', group_name: '' });
+      this.rows.push({ name: '', table_group_name: '' });
     },
     removeRow(index) {
       this.rows.splice(index, 1);
     },
+
     async addTrustees() {
       try {
         const combinedFormData = new FormData();
         this.rows.forEach((row, index) => {
           combinedFormData.append(`trusteesData[${index}][name]`, row.name);
           combinedFormData.append(
-            `trusteesData[${index}][group_name]`,
-            row.group_name
+            `trusteesData[${index}][table_group_name]`,
+            row.table_group_name
           );
         });
-
         // Send the array of FormData objects to the server
-        const response = await axios.post(
+        await axios.post(
           'http://localhost:8000/api/trustees/add_trustees.php',
           combinedFormData
         );
-
-        console.log(response);
+        // Reset the name and table_group_name properties for each row
+        this.rows.forEach((row) => {
+          row.name = '';
+          row.table_group_name = '';
+        });
       } catch (error) {
         console.error(error);
+      }
+    },
+    async fetchTrustees() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8000/api/trustees/get_allTrustees.php'
+        );
+        this.trustees = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteTrustee(trusteeId) {
+      try {
+        await axios.delete(
+          `http://localhost:8000/api/trustees/delete_trustee.php?id=${trusteeId}`
+        );
+        await this.fetchTrustees();
+      } catch (error) {
+        console.log(error);
       }
     },
   },
@@ -89,7 +134,7 @@ main {
   height: 100vh;
 }
 /* //FORM */
-.add-trustee-input-form {
+.add-trustee-input-trustees {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -97,6 +142,7 @@ main {
   border: 1px solid #ddd;
   border-radius: 9px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
 }
 
 h1 {
@@ -155,6 +201,60 @@ h1 {
   border-radius: 9px;
 }
 .delete-button:hover {
+  background-color: rgb(235, 63, 1);
+}
+
+/* //LIST OF ADDED TRUSTEES \\ */
+.all-added-trustee {
+  list-style-type: none;
+  padding: 0;
+}
+
+.added-trustee {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.trustee-content {
+  flex-grow: 1;
+}
+
+.trustee-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button,
+.save-btn {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: none;
+  background-color: #3490dc;
+  color: #fff;
+  border-radius: 9px;
+}
+.delete-button,
+.close-btn {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: none;
+  background-color: orangered;
+  color: #fff;
+  border-radius: 9px;
+}
+.edit-button:hover,
+.save-btn:hover {
+  background-color: #2779bd;
+}
+.delete-button:hover,
+.close-btn:hover {
   background-color: rgb(235, 63, 1);
 }
 </style>

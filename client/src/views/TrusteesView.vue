@@ -11,121 +11,45 @@
       </router-link>
     </div>
 
-    <div class="table-responsive table-margin-top">
-      <table class="table">
-        <thead class="thead-dark">
+    <div class="table-wrapper">
+      <table class="styled-table">
+        <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nimi</th>
             <th scope="col">Rühm</th>
-            <th scope="col">E - POSTIAADRESS</th>
+            <th scope="col">E-POSTIAADRESS</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Kerstin</td>
-            <td>Tuulepai rühma esindaja</td>
+          <tr v-for="(trustee, i) in trustees" :key="trustee.id">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ trustee.name }}</td>
+            <td>{{ trustee.table_group_name }}</td>
             <td>kerstinsireli@gmail.com</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Margit</td>
-            <td>Tähepai rühma esindaja</td>
-            <td>margitmeikup@gmail.com</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Karmo</td>
-            <td>Vihmapai rühma esindaja</td>
-            <td>karmo.kirspuu@gmail.com</td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Ketlin</td>
-            <td>Pilvepai rühma esindaja</td>
-            <td>ketlinsalla87@gmail.com</td>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>Aira</td>
-            <td>Päikesepai rühma esindaja</td>
-            <td>airatyrk@hot.ee</td>
-          </tr>
-          <tr>
-            <th scope="row">6</th>
-            <td>Moonika</td>
-            <td>Vikerkaarepai rühma esindaja</td>
-            <td>moonika.troost@gmail.com</td>
-          </tr>
-          <tr>
-            <th scope="row">7</th>
-            <td>Gerli</td>
-            <td>Päevalill rühma esindaja</td>
-            <td>gerlilihvar@gmail.com</td>
-          </tr>
-          <tr>
-            <th scope="row">8</th>
-            <td>Anne-Marie</td>
-            <td>Sinilill rühma esindaja</td>
-            <td>anne.maria.oksmann@gmail.com</td>
-          </tr>
-          <tr>
-            <th scope="row">9</th>
-            <td>Estelle</td>
-            <td>Rukkilill rühma esindaja</td>
-            <td>estellepeetri@gmail.com</td>
-          </tr>
-          <tr>
-            <th scope="row">10</th>
-            <td>Liis K</td>
-            <td>Saialill rühma esindaja</td>
-            <td>liiskitsing@gmail.com</td>
-          </tr>
-          <tr>
-            <th scope="row">11</th>
-            <td>Annika</td>
-            <td>Võilill rühma esindaja</td>
-            <td>annika.25@hotmail.com</td>
-          </tr>
-          <tr>
-            <th scope="row">12</th>
-            <td>Kersti</td>
-            <td>Meelespea rühma esindaja</td>
-            <td>kerstik23@hot.ee</td>
-          </tr>
-          <tr>
-            <th scope="row">13</th>
-            <td>Jane</td>
-            <td>Kaeralille rühma esindaja</td>
-            <td>jane.k6nno@gmail.com</td>
-          </tr>
-          <tr>
-            <th scope="row">14</th>
-            <td>Moonika</td>
-            <td>Kullapai maja õpetajate esindaja</td>
-            <td>moonika.venepailasteaed.ee</td>
-          </tr>
-          <tr>
-            <th scope="row">15</th>
-            <td>Annika</td>
-            <td>Lillepai maja õpetajate esindaja</td>
-            <td>Annika.Paltsmar@pailasteaed.ee</td>
           </tr>
         </tbody>
       </table>
     </div>
-
     <FooterView />
   </div>
 </template>
 
 <script scoped>
+import axios from 'axios';
 export default {
   name: 'TrusteesView',
 
   data() {
-    return {};
+    return {
+      trustees: [],
+    };
+  },
+  async created() {
+    const response = await axios.get(
+      'http://localhost:8000/api/trustees/get_alltrustees.php'
+    );
+    this.trustees = response.data;
   },
 };
 </script>
@@ -173,43 +97,57 @@ export default {
   box-shadow: 0 0px 3px 1px rgba(31, 31, 31, 0.3);
   transition: all 200ms ease-out;
 }
-.table-margin-top {
-  margin: 100px 0px 100px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url('./../photos/background-2.webp');
-  background-size: cover;
-  overflow-x: auto;
-}
-table {
+.styled-table {
   border-collapse: collapse;
-  font-size: 1rem;
+  margin: 25px 0;
+  font-size: 18px;
+  text-align: left;
 }
-@media screen and (max-width: 750px) {
-  .table-margin-top {
-    display: block;
-  }
-  table {
-    width: 100%;
-  }
-  .table-margin-top {
-    background-image: none;
-  }
+/* TABLE  */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 18px;
+  text-align: left;
 }
-thead {
-  background-color: rgb(39, 39, 39);
-  color: #fff;
+.styled-table thead th {
+  background-color: #3498db;
+  color: #ffffff;
+  font-weight: bold;
 }
-th,
-td {
-  padding: 10px 16px;
-  white-space: nowrap;
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
 }
-tbody tr:nth-child(odd) {
-  background-color: #f8f9fa;
+
+.styled-table tbody tr {
+  background-color: #f5f5f5;
+  transition: all 0.3s;
 }
-tbody tr:nth-child(even) {
-  background-color: #e9ecef;
+
+.styled-table tbody tr:hover {
+  background-color: #e0e0e0;
+}
+
+.styled-table tbody td {
+  text-align: left;
+}
+
+.styled-table tbody td:last-child {
+  text-align: center;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #3498db;
+}
+
+.table-wrapper {
+  width: 50%;
+  margin: auto;
+  overflow-x: auto;
+  margin-bottom: 100px;
 }
 </style>
