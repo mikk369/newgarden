@@ -97,19 +97,14 @@ export default {
   box-shadow: 0 0px 3px 1px rgba(31, 31, 31, 0.3);
   transition: all 200ms ease-out;
 }
-.styled-table {
-  border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 18px;
-  text-align: left;
-}
+
 /* TABLE  */
 .styled-table {
   width: 100%;
   border-collapse: collapse;
   margin: 25px 0;
   font-size: 18px;
-  text-align: left;
+  margin: 100px 0 100px 0;
 }
 .styled-table thead th {
   background-color: #3498db;
@@ -124,12 +119,7 @@ export default {
 }
 
 .styled-table tbody tr {
-  background-color: #f5f5f5;
-  transition: all 0.3s;
-}
-
-.styled-table tbody tr:hover {
-  background-color: #e0e0e0;
+  background-color: aliceblue;
 }
 
 .styled-table tbody td {
@@ -148,6 +138,5 @@ export default {
   width: 50%;
   margin: auto;
   overflow-x: auto;
-  margin-bottom: 100px;
 }
 </style>
