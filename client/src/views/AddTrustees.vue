@@ -36,7 +36,9 @@
             <div class="trustee-content">{{ trustee.name }}</div>
             <div class="trustee-content">{{ trustee.table_group_name }}</div>
             <div class="trustee-actions">
-              <button @click="editPost(post)" class="edit-button">Muuda</button>
+              <button @click="editTrustee(trustee)" class="edit-button">
+                Muuda
+              </button>
               <button @click="deleteTrustee(trustee.id)" class="delete-button">
                 Kustuta
               </button>
@@ -44,6 +46,28 @@
           </li>
         </ul>
       </section>
+      <!-- Modal for editing a contact -->
+      <div v-if="isModalVisible" class="modal">
+        <div class="modal-wrapper">
+          <h2>Muuda kontakti</h2>
+          <form>
+            <input
+              type="text"
+              v-model="editName"
+              id="name"
+              placeholder="Nimi" />
+            <input
+              type="text"
+              v-model="editTable_group_name"
+              id="name"
+              placeholder="Rühm" />
+            <button class="save-btn" @click.prevent="updateTrustee()">
+              Salvesta muudatused
+            </button>
+          </form>
+          <button class="close-btn" @click="closeModal">Sulge</button>
+        </div>
+      </div>
     </main>
   </div>
 </template>
@@ -60,6 +84,12 @@ export default {
     return {
       rows: [{ name: '', table_group_name: '' }],
       trustees: [],
+      isModalVisible: false,
+      id: '',
+      name: '',
+      table_group_name: '',
+      editName: '',
+      editTable_group_name: '',
     };
   },
   async created() {
@@ -93,6 +123,7 @@ export default {
           row.name = '';
           row.table_group_name = '';
         });
+        await this.fetchTrustees();
       } catch (error) {
         console.error(error);
       }
@@ -116,6 +147,37 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    // Get data to modal
+    editTrustee(trustee) {
+      this.isModalVisible = true;
+      this.id = trustee.id;
+      this.editName = trustee.name;
+      this.editTable_group_name = trustee.table_group_name;
+    },
+    async updateTrustee() {
+      try {
+        const formData = {
+          id: this.id,
+          name: this.editName,
+          table_group_name: this.editTable_group_name,
+        };
+        await axios.patch(
+          `http://localhost:8000/api/trustees/update_trustee.php?id=${this.id}`,
+          formData
+        );
+        // fetch contacts after updating
+        await this.fetchTrustees();
+
+        // close modal after update
+        this.closeModal();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // Close the modal
+    closeModal() {
+      this.isModalVisible = false;
     },
   },
 };
@@ -256,5 +318,61 @@ h1 {
 .delete-button:hover,
 .close-btn:hover {
   background-color: rgb(235, 63, 1);
+}
+/* //MODAL\\ */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-wrapper {
+  background: white;
+  padding: 20px;
+  border-radius: 9px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.image-preview {
+  /* max-width: 100%; */
+  max-height: 200px;
+  width: 150px;
+}
+
+.modal label {
+  font-weight: bold;
+}
+
+.modal input,
+.modal textarea,
+.modal button {
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
 }
 </style>
