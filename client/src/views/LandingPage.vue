@@ -117,7 +117,7 @@ export default {
 
   async created() {
     const response = await axios.get(
-      'http://localhost:8000/api/posts/get_allPosts.php',
+      'http://localhost:8000/api/posts/get_allposts.php',
       {
         // withCredentials: true,
       }
