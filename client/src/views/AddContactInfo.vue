@@ -62,10 +62,15 @@
       <section>
         <h1>Lisatud kontaktid</h1>
         <ul class="all-added-contacts">
-          <li class="added-contacts" v-for="contact in contacts" :key="contact.id">
+          <li
+            class="added-contacts"
+            v-for="contact in contacts"
+            :key="contact.id">
             <div class="contact-content">{{ contact.name }}</div>
             <div class="contact-actions">
-              <button @click="editContact(contact)" class="edit-button">Muuda</button>
+              <button @click="editContact(contact)" class="edit-button">
+                Muuda
+              </button>
               <button @click="deleteContact(contact.id)" class="delete-button">
                 Kustuta
               </button>
@@ -73,8 +78,8 @@
           </li>
         </ul>
       </section>
-       <!-- Modal for editing a contact -->
-       <div v-if="isModalVisible" class="modal">
+      <!-- Modal for editing a contact -->
+      <div v-if="isModalVisible" class="modal">
         <div class="modal-wrapper">
           <h2>Muuda kontakti</h2>
           <form>
@@ -84,9 +89,8 @@
               name="image"
               show-size
               accept="image/png, image/jpg, image/webp"
-              @change="selectFile"
-              />
-              <!-- <div class="preview-img-wrapper">
+              @change="selectFile" />
+            <!-- <div class="preview-img-wrapper">
                 <img
                 class="image-preview"
                 :src="editImage"
@@ -150,7 +154,7 @@ export default {
       email: '',
       isModalVisible: false,
       editImage: '',
-      editName : '',
+      editName: '',
       editJobtitle: '',
       editPhone_1: '',
       editPhone_2: '',
@@ -184,7 +188,7 @@ export default {
         this.phone_1 = '';
         this.phone_2 = '';
         this.email = '';
-        
+
         await this.fetchContacts();
       } catch (error) {
         console.log(error);
@@ -210,48 +214,45 @@ export default {
         console.log(error);
       }
     },
-    // Get data to modal 
-      editContact(contact) {
-        this.isModalVisible = true;
-        this.id = contact.id;
-        this.editImage = contact.image;
-        this.editName = contact.name;
-        this.editJobtitle = contact.jobTitle;
-        this.editPhone_1 = contact.phone_1;
-        this.editPhone_2 = contact.phone_2;
-        this.editEmail = contact.email;
-      },
-      async updateContact(){
-        try {
-          const formData = {
-            id: this.id,
-            image: this.editImage,
-            name: this.editName,
-            jobTitle: this.editJobtitle,
-            phone_1: this.editPhone_1,
-            phone_2: this.editPhone_2,
-            email: this.editEmail,
-          };
-          await axios.patch(`http://localhost:8000/api/contacts/update_contact.php?id=${this.id}`, formData);
-          // fetch contacts after updating
-          await this.fetchContacts(); 
-  
-          // close modal after update
-          this.closeModal();
-        } catch (error) {
-          console.log(error)
-        }
-      },
-       // Close the modal
-       closeModal() {
-        this.isModalVisible = false;
-        this.image = '';
-        this.name = '';
-        this.jobTitle = '';
-        this.phone_1 = '';
-        this.phone_2 = '';
-        this.email = '';
-      },
+    // Get data to modal
+    editContact(contact) {
+      this.isModalVisible = true;
+      this.id = contact.id;
+      this.editImage = contact.image;
+      this.editName = contact.name;
+      this.editJobtitle = contact.jobTitle;
+      this.editPhone_1 = contact.phone_1;
+      this.editPhone_2 = contact.phone_2;
+      this.editEmail = contact.email;
+    },
+    async updateContact() {
+      try {
+        const formData = {
+          id: this.id,
+          image: this.editImage,
+          name: this.editName,
+          jobTitle: this.editJobtitle,
+          phone_1: this.editPhone_1,
+          phone_2: this.editPhone_2,
+          email: this.editEmail,
+        };
+        await axios.patch(
+          `http://localhost:8000/api/contacts/update_contact.php?id=${this.id}`,
+          formData
+        );
+        // fetch contacts after updating
+        await this.fetchContacts();
+
+        // close modal after update
+        this.closeModal();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // Close the modal
+    closeModal() {
+      this.isModalVisible = false;
+    },
   },
 };
 </script>
@@ -266,6 +267,12 @@ main {
   align-items: center;
   display: flex;
   flex-direction: column;
+  background-color: aliceblue;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 9px;
+  margin-bottom: 50px;
 }
 .grid-container {
   display: grid;
@@ -290,19 +297,19 @@ main {
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 9px;
 }
 .form-button {
   padding: 0.8rem 1.5rem;
-  background-color: var(--color-grey-300);
+  background-color: #28a745;
   color: rgb(0, 0, 0);
   border: none;
-  border-radius: 4px;
+  border-radius: 9px;
   cursor: pointer;
   font-size: 1rem;
 }
 .form-button:hover {
-  background-color: var(--color-grey-200);
+  background-color: #1c8334;
 }
 
 /* added contacts list  */
@@ -394,10 +401,10 @@ main {
   flex-direction: column;
   gap: 10px;
 }
-.image-preview{
+.image-preview {
   /* max-width: 100%; */
   max-height: 200px;
- width: 150px;
+  width: 150px;
 }
 
 .modal label {
