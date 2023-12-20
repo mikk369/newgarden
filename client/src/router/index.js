@@ -76,8 +76,8 @@ const routes = [
   },
   {
     path: '/hoolekoguinfo',
-    name: 'EditTrusteesInfo',
-    component: () => import('./../views/EditTrusteesInfo.vue'),
+    name: 'AddTrustees',
+    component: () => import('./../views/AddTrustees.vue'),
   },
   {
     path: '/ruhmadeinfo',
