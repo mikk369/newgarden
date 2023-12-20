@@ -190,10 +190,17 @@ main {
   gap: 1.5rem;
   justify-content: center;
   align-items: center;
+  background-color: aliceblue;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 9px;
+  margin-bottom: 50px;
 }
 .add-post-form-title {
   padding: 0.8rem;
   width: 50%;
+  border-radius: 9px;
 }
 .add-post-form-textarea {
   height: 10rem;
@@ -207,7 +214,7 @@ main {
 }
 .form-button {
   padding: 0.8rem 1.5rem;
-  background-color: var(--color-grey-300);
+  background-color: #28a745;
   color: rgb(0, 0, 0);
   border: none;
   border-radius: 9px;
@@ -216,7 +223,7 @@ main {
 }
 
 .form-button:hover {
-  background-color: var(--color-grey-200);
+  background-color: #1c8334;
 }
 section {
   margin-top: 20px;
@@ -279,6 +286,7 @@ h1 {
   background-color: rgb(235, 63, 1);
 }
 
+/* //MODAL\\ */
 .modal {
   position: fixed;
   top: 0;
