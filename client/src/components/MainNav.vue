@@ -5,22 +5,34 @@
         <router-link class="link-color-second" to="/admin"> Home</router-link>
       </li>
       <li class="side-nav-links">
-        <router-link class="link-color-second" to="/lisapostitus">AddPost</router-link>
+        <router-link class="link-color-second" to="/lisapostitus"
+          >Postitused</router-link
+        >
       </li>
       <li class="side-nav-links">
-        <router-link class="link-color-second" to="/kontaktideinfo">Kontaktid</router-link>
+        <router-link class="link-color-second" to="/kontaktideinfo"
+          >Kontaktid</router-link
+        >
       </li>
       <li class="side-nav-links">
-        <router-link class="link-color-second" to="/hoolekoguinfo">Hoolekogu</router-link>
+        <router-link class="link-color-second" to="/hoolekoguinfo"
+          >Hoolekogu</router-link
+        >
       </li>
       <li class="side-nav-links">
-        <router-link class="link-color-second" to="/ruhmadeinfo">Rühmad</router-link>
+        <router-link class="link-color-second" to="/ruhmadeinfo"
+          >Rühmad</router-link
+        >
       </li>
       <li class="side-nav-links">
-        <router-link class="link-color-second" to="/projektideinfo">Projektid</router-link>
+        <router-link class="link-color-second" to="/projektideinfo"
+          >Projektid</router-link
+        >
       </li>
       <li class="side-nav-links">
-        <router-link class="link-color-second" to="/dokumentideinfo">Dokumendid</router-link>
+        <router-link class="link-color-second" to="/dokumentideinfo"
+          >Dokumendid</router-link
+        >
       </li>
     </ul>
   </nav>
@@ -60,7 +72,7 @@ export default {
 .side-nav-links :hover,
 .active:link,
 .active:visited {
-  background-color: var(--color-grey-50);
-  border-radius: var(--border-radius-sm);
+  background-color: aliceblue;
+  border-radius: 9px;
 }
 </style>
