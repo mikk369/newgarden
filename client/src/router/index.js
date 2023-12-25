@@ -91,13 +91,18 @@ const routes = [
   },
   {
     path: '/projektideinfo',
-    name: 'EditProjectsInfo',
-    component: () => import('./../views/EditProjectsInfo.vue'),
+    name: 'AddProjectsInfo',
+    component: () => import('./../views/AddProjectsInfo.vue'),
   },
   {
     path: '/dokumentideinfo',
     name: 'EditDocuments',
     component: () => import('./../views/EditDocuments.vue'),
+  },
+  {
+    path: '/projekt/:id',
+    name: 'project',
+    component: () => import('./../views/ProjectView.vue'),
   },
 ];
 

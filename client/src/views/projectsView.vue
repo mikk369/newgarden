@@ -1,112 +1,111 @@
 <template>
   <HeaderView />
-  <div class="projects-wrapper">
-    <div class="project-heading">
-      <h1 class="project-title">„PAIde Lasteaia teekond lapsest lähtumiseni“</h1>
-    </div>
-    <div class="text-container">
-      11.03-25.05.2023 viidi Euroopa Sotsiaalfondi toel ellu PAIde Lasteaia projekt „PAIde Lasteaia
-      teekond lapsest lähtumiseni“. <br /><br />Projekti raames läbiti Hoolingu koolitajate poolt
-      läbiviidud õppepäevad teemal „Lapsest lähtuv projektõpe praktikas“ 11.03-12.03.2023 Paide
-      Riigigümnaasiumi ruumides ning saadud teadmiste kinnistamiseks ning praktikasse rakendamiseks
-      viidi läbi neli õpiringi koolitusteemadel perioodil 23.03-25.05.2023.<br /><br />
-      Projekti eesmärk oli projektõppe rakendamine PAIde Lasteaia kõikides rühmades. Saavutada
-      oskused ning teadmised ja julgus projektõppe, ehk lapsest lähtuva õpikäsituse täielikuks
-      rakendamiseks rühmakeskkonnas.<br /><br />
-      Koolituse toel on PAIde Lasteaia kõik rühmad on teemaõppelt üle läinud lapsest lähtuvale
-      õpikäsitusele ehk projektõppele. Õpetajad on õppeprotsessis lapse toetajad ja innustajad,
-      õpikeskkonna loojad. Koostööd tehakse erinevate spetsialistidega, et tuua lasteni neid
-      huvitavaid teadmisi. Õppeprotsess on tervik ning vältab läbi mänguliste tegevuste terve
-      lasteaiapäeva vältel. Lapsed on ise tegutsemas ning julgevad avastada, uurida ja katsetada
-      ning arutleda. Õpetajad on teadlikud ja enesekindlad rakendatava meetodi vajalikkusest ja
-      tulemuslikkusest.<br /><br />
-      Projekti rahastas Euroopa sotsiaalfond kogusummas 3045,20 eurot.
-    </div>
-    <div class="logo-container">
-      <div class="logo">
-        <img src="../photos/paidelogo.webp" alt="" srcset="" />
+  <div class="content-wrapper">
+    <div class="heading">
+        <h1>Projektid</h1>
       </div>
-      <div class="logo">
-        <img src="../photos/eesti_tulevik.webp" alt="" srcset="" />
-      </div>
-      <div class="logo">
-        <img src="../photos/EU_liit.webp" alt="" srcset="" />
+  <div class="card-grid">
+        <div class="no-posts-div" v-if="projects.length === 0" >
+          <h3>Hetkel projekti puuduvad</h3>
+        </div>
+        <div
+        class="paragraph-card"
+        v-for="project in projects"
+        :key="project.id"
+        >
+        <router-link style="text-decoration: none" :to="{ params: {id: project.id}, 
+        name: 'project'}">
+         <div class="cards">
+           <h4>
+             <b>{{ project.name }}</b>
+            </h4>
+            <p class="lower-paragraph">{{ project.project_content }}</p>
+          </div>
+        </router-link>
+        </div>
       </div>
     </div>
-  </div>
   <FooterView />
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'Projects',
   data() {
-    return {};
+    return {
+      projects: []
+    };
   },
+  async created() {
+    const response = await axios.get("http://localhost:8000/api/projects/get_allProjects.php")
+    this.projects = response.data
+  }
 };
 </script>
 
 <style>
-.project-heading {
-  padding: 42px;
-}
-.projects-wrapper {
+
+.heading {
   display: flex;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  padding: 30px;
 }
-.text-container {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 20px;
-  line-height: 1.6;
-  padding: 60px 0 32px 0;
+.heading h1 {
+  color: #000;
 }
-@media (min-width: 960px) {
-  .text-container {
-    width: 960px;
-    padding: 60px 42px 32px 42px;
+
+.card-grid {
+  display: grid;
+  padding: 60px 20px 60px 20px;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media screen and (max-width: 950px) {
+  .card-grid {
+    grid-template-columns: 1fr;
   }
 }
-@media (max-width: 960px) {
-  .project-heading {
-    padding: 32px 20px 20px 20px;
-  }
-  .project-title {
-    font-size: 26px;
-  }
-  .text-container {
-    padding: 40px 42px 32px 42px;
-    font-size: 18px;
-    line-height: 1.5;
-  }
+.no-posts-div {
+  text-align: center;
+  grid-column: 2;
+  align-self: center;
 }
-.logo-container {
-  padding: 60px 0 92px 0;
+.paragraph-card {
+  white-space: normal;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 9px;
+  overflow: hidden;
   display: flex;
-  gap: 64px;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10px; /* Add margin for spacing between cards */
 }
-@media (max-width: 650px) {
-  .project-heading {
-    padding: 32px 10px 10px 10px;
-  }
-  .project-title {
-    font-size: 20px;
-  }
-  .logo-container {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-bottom: 32px 0 32px 0;
-  }
+
+.cards {
+  padding: 20px;
+  color: #363636;
 }
-@media (max-width: 460px) {
-  .project-title {
-    font-size: 16px;
-    text-align: center;
-  }
-  .text-container {
-    padding: 40px 26px 32px 26px;
-  }
+
+h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.lower-paragraph {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-align: center;
+  font-size: 1rem;
+  color: #555; /* Set the color as needed */
+}
+
+.content-wrapper {
+  height: 85vh;
 }
 </style>
