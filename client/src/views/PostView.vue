@@ -16,7 +16,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'LandingPage',
+  name: 'PostView',
   data() {
     return {
       id: this.$route.params.id,

@@ -70,7 +70,7 @@
       <div class="heading">
         <h1>Teated</h1>
       </div>
-      <div class="news-main">
+      <div class="card-grid">
         <div class="no-posts-div" v-if="posts.length === 0">
           <h3>Hetkel teated puuduvad</h3>
         </div>
@@ -360,14 +360,14 @@ export default {
   color: #000;
 }
 /* news cards positioning  */
-.news-main {
+.card-grid {
   display: grid;
   padding: 60px 20px 60px 20px;
   grid-gap: 1rem;
   grid-template-columns: repeat(3, 1fr);
 }
 @media screen and (max-width: 950px) {
-  .news-main {
+  .card-grid {
     grid-template-columns: 1fr;
   }
 }

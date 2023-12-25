@@ -2,17 +2,17 @@
   <div class="grid-container">
     <SideBar />
     <main>
-      <form class="add-post-input-form" @submit.prevent="addPost">
+      <form class="form-info" @submit.prevent="addPost">
         <h1>Lisa postitus</h1>
         <input
           type="text"
-          class="add-post-form-title"
-          placeholder="Pealkiri"
+          class="form-title"
+          placeholder="Postituse pealkiri"
           v-model="title" />
         <textarea
           name="content"
           id="content"
-          class="add-post-form-textarea"
+          class="form-textarea"
           placeholder="Tekst"
           v-model="content"></textarea>
         <button class="form-button">Lisa postitus</button>
@@ -183,7 +183,7 @@ main {
   grid-template-rows: auto 1fr;
   height: 100vh;
 }
-.add-post-input-form {
+.form-info {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -197,12 +197,12 @@ main {
   padding: 9px;
   margin-bottom: 50px;
 }
-.add-post-form-title {
+.form-title {
   padding: 0.8rem;
   width: 50%;
   border-radius: 9px;
 }
-.add-post-form-textarea {
+.form-textarea {
   height: 10rem;
   width: 50%;
   padding: 0.8rem;
@@ -225,6 +225,7 @@ main {
 .form-button:hover {
   background-color: #1c8334;
 }
+/* ADDED POST LIST  */
 section {
   margin-top: 20px;
 }

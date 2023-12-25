@@ -11,7 +11,7 @@
       </router-link>
     </div>
 
-    <div class="table-wrapper">
+    <div class="content-wrapper">
       <table class="styled-table">
         <thead>
           <tr>
@@ -134,9 +134,10 @@ export default {
   border-bottom: 2px solid #3498db;
 }
 
-.table-wrapper {
+.content-wrapper {
   width: 50%;
   margin: auto;
   overflow-x: auto;
+  height: 70vh;
 }
 </style>
