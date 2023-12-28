@@ -96,8 +96,8 @@ const routes = [
   },
   {
     path: '/dokumentideinfo',
-    name: 'EditDocuments',
-    component: () => import('./../views/EditDocuments.vue'),
+    name: 'AddDocuments',
+    component: () => import('./../views/AddDocuments.vue'),
   },
   {
     path: '/projekt/:id',
