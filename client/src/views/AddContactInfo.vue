@@ -3,7 +3,7 @@
     <SideBar />
     <main>
       <form
-        class="edit-contact-info"
+        class="form-info"
         @submit.prevent="addContact"
         enctype="multipart/form-data">
         <h1 class="form-heading">Lisa kontakt</h1>
@@ -61,13 +61,13 @@
       </form>
       <section>
         <h1>Lisatud kontaktid</h1>
-        <ul class="all-added-contacts">
+        <ul class="added-list-items">
           <li
-            class="added-contacts"
+            class="list-items"
             v-for="contact in contacts"
             :key="contact.id">
-            <div class="contact-content">{{ contact.name }}</div>
-            <div class="contact-actions">
+            <div class="list-content">{{ contact.name }}</div>
+            <div class="list-actions">
               <button @click="editContact(contact)" class="edit-button">
                 Muuda
               </button>
@@ -262,7 +262,7 @@ main {
   background-color: var(--color-grey-50);
   padding: 4rem 4.8rem 6.4rem;
 }
-.edit-contact-info {
+.form-info {
   justify-content: center;
   align-items: center;
   display: flex;
@@ -271,7 +271,7 @@ main {
   border: 1px solid #ddd;
   border-radius: 9px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 9px;
+  padding: 3rem 0 3rem 0;
   margin-bottom: 50px;
 }
 .grid-container {
@@ -313,12 +313,12 @@ main {
 }
 
 /* added contacts list  */
-.all-added-contacts {
+.added-list-items {
   list-style-type: none;
   padding: 0;
 }
 
-.added-contacts {
+.list-items {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -332,7 +332,7 @@ main {
   flex-grow: 1;
 }
 
-.contact-actions {
+.list-actions {
   display: flex;
   gap: 10px;
 }

@@ -31,6 +31,20 @@
             v-model="project_content" ></textarea>
         <button class="form-button">Lisa projekt</button>
       </form>
+      <section>
+        <h1>Lisatud projektid</h1>
+        <ul class="all-added-posts">
+          <li class="added-post" v-for="projects in reversedPosts" :key="projects.id">
+            <div class="post-content">{{ projects.name }}</div>
+            <div class="post-actions">
+              <button @click="editPost(post)" class="edit-button">Muuda</button>
+              <button @click="deletePost(post.id)" class="delete-button">
+                Kustuta
+              </button>
+            </div>
+          </li>
+        </ul>
+      </section>
     </main>
   </div>
 </template>
@@ -46,11 +60,34 @@ export default {
   },
   data() {
     return {
+      projects: [],
       name: "",
       project_content: "",
     };
   },
+  async created() {
+    await this.fetchProjects();
+  },
+  computed: {
+    // So new post will be top
+    reversedPosts() {
+      return this.projects.slice().reverse();
+    },
+  },
   methods:{
+    async fetchProjects() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8000/api/projects/get_allProjects.php',
+          {
+            // withCredentials: true,
+          }
+          );
+        this.projects = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
    async addProject(){
       try {
         const formData = new FormData();
@@ -133,5 +170,67 @@ main {
 }
 .form-button:hover {
   background-color: #1c8334;
+}
+
+/* ADDED PROJECTS LIST  */
+section {
+  margin-top: 20px;
+}
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.all-added-posts {
+  list-style-type: none;
+  padding: 0;
+}
+
+.added-post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.post-content {
+  flex-grow: 1;
+}
+
+.post-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button,
+.save-btn {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: none;
+  background-color: #3490dc;
+  color: #fff;
+  border-radius: 9px;
+}
+.delete-button,
+.close-btn {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: none;
+  background-color: orangered;
+  color: #fff;
+  border-radius: 9px;
+}
+.edit-button:hover,
+.save-btn:hover {
+  background-color: #2779bd;
+}
+.delete-button:hover,
+.close-btn:hover {
+  background-color: rgb(235, 63, 1);
 }
 </style>
