@@ -5,7 +5,7 @@
         <router-link class="link-color-second" to="/admin"
         :class="{'active-link': $route.path === '/admin' }">
           <i class="pi pi-home" style="font-size: 1.5rem">
-        </i> <span>Home</span></router-link>
+        </i><span>Pealeht</span></router-link>
       </li>
       <li class="side-nav-links">
         <router-link class="link-color-second" to="/lisapostitus"
@@ -45,12 +45,17 @@
           <i class="pi pi-file" style="font-size: 1.5rem">
         </i><span>Dokumendid</span></router-link>
       </li>
+      <li class="side-nav-links">
+        <router-link class="link-color-second" to="/seaded"
+        :class="{'active-link': $route.path === '/seaded' }">
+          <i class="pi pi-file" style="font-size: 1.5rem">
+        </i><span>Seaded</span></router-link>
+      </li>
     </ul>
   </nav>
 </template>
 
 <script>
-import 'primeicons/primeicons.css';
 export default {
   name: 'MainNav',
   data() {
@@ -81,7 +86,7 @@ export default {
   text-decoration: none;
 }
 
-
+.link-color-second:hover,
 .active-link {
   background-color: aliceblue;
   border-radius: 9px;
