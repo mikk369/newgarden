@@ -10,97 +10,23 @@
       </router-link>
     </div>
     <div class="card-area">
-      <div class="card">
+      <div class="card" v-for="group in groups" :key="group.id">
         <img
           class="contact-card-image"
-          src="./../photos/Paide_lasteaed_logo4.png"
+          src="./../photos/pailasteaed.jpg"
           alt="Jane"
           style="max-width: 100%" />
-        <br />
-        <h3>Saialill</h3>
-        <p>Õpetaja: Riina</p>
-        <p>Assistent: Anu</p>
-        <p>Õpetaja abi: Merje</p>
-        <p>Telefon: 58366694</p>
-      </div>
-      <div class="card">
-        <img
-          class="contact-card-image"
-          src="./../photos/Paide_lasteaed_logo4.png"
-          alt="Jane"
-          style="max-width: 100%" />
-        <br />
-        <h3>Võilill</h3>
-        <p>Õpetaja: Egle</p>
-        <p>Õpetaja: Ülle</p>
-        <p>Õpetaja abi: Gerli</p>
-        <p>Telefon: 58359002</p>
-      </div>
-      <div class="card">
-        <img
-          class="contact-card-image"
-          src="./../photos/Paide_lasteaed_logo4.png"
-          alt="Jane"
-          style="max-width: 100%" />
-        <br />
-        <h3>Sinilill</h3>
-        <p>Õpetaja: Marge</p>
-        <p>Õpetaja: Tiina</p>
-        <p>Õpetaja abi: Angelika</p>
-        <p>telefon: 58368062</p>
-      </div>
-      <div class="card">
-        <img
-          class="contact-card-image"
-          src="./../photos/Paide_lasteaed_logo4.png"
-          alt="Jane"
-          style="max-width: 100%" />
-        <br />
-        <h3>Päevalill</h3>
-        <p>Õpetaja: Maryann</p>
-        <p>Õpetaja: Külliki</p>
-        <p>Õpetaja abi: Ragne</p>
-        <p>telefon: 58364135</p>
-      </div>
-      <div class="card">
-        <img
-          class="contact-card-image"
-          src="./../photos/Paide_lasteaed_logo4.png"
-          alt="Jane"
-          style="max-width: 100%" />
-        <br />
-        <h3>Kaeralill</h3>
-        <p>Õpetaja: Tetjana</p>
-        <p>Õpetaja: Ulvi</p>
-        <p>Õpetaja abi: Janne</p>
-        <p>Telefon: 58364125</p>
-      </div>
-      <div class="card">
-        <img
-          class="contact-card-image"
-          src="./../photos/Paide_lasteaed_logo4.png"
-          alt="Jane"
-          style="max-width: 100%" />
-        <br />
-        <h3>Rukkilill</h3>
-        <p>Õpetaja: Ehta</p>
-        <p>Õpetaja: Helbe-Malle</p>
-        <p>Õpetaja abi: Pille</p>
-        <p>Telefon: 58366458</p>
-      </div>
-      <div class="card meelespea">
-        <img
-          class="contact-card-image"
-          src="./../photos/Paide_lasteaed_logo4.png"
-          alt="Jane"
-          style="max-width: 100%" />
-        <br />
-        <h3>Meelespea</h3>
-        <p>Õpetaja: Annika</p>
-        <p>Eripedagoog: Helena</p>
-        <p>Assistent: Elery</p>
-        <p>Õpetaja abi: Svetlana</p>
-        <p>Telefon: 5572686</p>
+          <div class="lower-card">
+            <h3>{{ group.data.group_name }}</h3>
+            <div v-for="profession in group.data.professions" :key="group.id">
+              <p v-if="profession.teacher_1">Õpetaja: {{ profession.teacher_1 }}</p>
+              <p v-if="profession.teacher_2">Õpetaja: {{ profession.teacher_2 }}</p>
+              <p v-if="profession.assistant_teacher">Õpetaja abi: {{ profession.assistant_teacher }}</p>
+              <p v-if="profession.assistant">Assistent: {{ profession.assistant }}</p>
+              <p v-if="profession.special_teacher">Eripedagoog: {{ profession.special_teacher }}</p>
+            </div>
+            <p>Telefon: {{ group.data.phone }}</p>
+          </div>
       </div>
     </div>
     <FooterView />
@@ -108,16 +34,33 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'ContactView',
   data() {
-    return {};
+    return {
+      groups: []
+    };
   },
+  async created() {
+    await this.fetchGroups();
+  },
+  methods: {
+    async fetchGroups() {
+      try {
+        const response = await axios.get('http://localhost:8000/api/groups/get_allGroups.php');
+        this.groups = response.data;
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 };
 </script>
 
 <style scoped>
-.links-main {
+.card-area {
   min-height: 100vh;
 }
 .links {
@@ -170,9 +113,13 @@ export default {
   padding: 9px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   background-color: #fff;
+  border-radius: 9px;
 }
 .card img {
   margin-bottom: 20px;
+}
+.lower-card{
+  text-align: center;
 }
 h3 {
   font-size: 1.75rem;
