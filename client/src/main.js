@@ -6,6 +6,8 @@ import HeaderView from './components/HeaderView.vue';
 import VueGtag from 'vue-gtag';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import 'primeicons/primeicons.css';
+import 'primevue/resources/themes/saga-blue/theme.css'
 
 const app = createApp(App);
 app.use(VueGtag, {
