@@ -141,8 +141,7 @@ router.beforeEach(async (to, from, next) => {
       // Check if PHPSESSID cookie is present
       const hasSessionCookie = document.cookie.split(';').some(c => c.trim().startsWith('PHPSESSID='));
       // Make a request to your session.php endpoint to check if the user is logged in
-      const response = await axios.get('http://localhost:8000/api/users/session.php');
-      console.log(response.data);
+      const response = await axios.get('http://localhost:8000/api/users/session.php', { withCredentials: true });
       const { loggedIn } = response.data;
 
       // Check if the user is logged in
