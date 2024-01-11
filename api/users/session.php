@@ -1,8 +1,14 @@
 <?php
+require_once 'cookie.php';
+
+// Call the function to set session cookie parameters
+setSessionCookieParams();
+
 session_start();
 header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json; charset=UTF-8");
+
 // Start or resume a session
 $response = [
     'loggedIn' => false,
