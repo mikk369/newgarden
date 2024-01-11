@@ -20,9 +20,13 @@ export default {
 
 <style>
 aside {
-  /* background-color: #fff; */
+  background-color: #fff;
   padding: 3.2rem 2.4rem;
-  border-right: 1px solid aliceblue;
+  border: 1px solid aliceblue;
+  border-top-right-radius: 3rem; /* Adjust as needed */
+  border-bottom-right-radius: 3rem; /* Adjust as needed */
+  overflow: hidden;
   grid-row: 1 / -1;
+  background-color: aliceblue;
 }
 </style>

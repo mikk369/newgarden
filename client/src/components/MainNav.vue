@@ -48,19 +48,38 @@
       <li class="side-nav-links">
         <router-link class="link-color-second" to="/seaded"
         :class="{'active-link': $route.path === '/seaded' }">
-          <i class="pi pi-file" style="font-size: 1.5rem">
+          <i class="pi pi-cog" style="font-size: 1.5rem">
         </i><span>Seaded</span></router-link>
+      </li>
+      <li class="btn-logout" @click="Logout">
+          <i class="pi pi-power-off" style="font-size: 1.5rem">
+          </i><span>Log out</span>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'MainNav',
   data() {
     return {};
   },
+  methods: {
+      async Logout() {
+        try {
+          const response = await axios.post(
+            'http://localhost:8000/api/users/logout.php');
+          if(response.data.success) {
+            this.$router.push('/login')
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    },
 };
 </script>
 
@@ -72,6 +91,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  border-radius: 5rempx;
 }
 .side-nav-links,
 :link,
@@ -85,14 +105,23 @@ export default {
   transition: all 0.3s;
   text-decoration: none;
 }
+.btn-logout{
+  margin-top: 3rem;
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+  gap: 1.2rem;
+  cursor: pointer;
+}
 
 .link-color-second:hover,
 .active-link {
-  background-color: aliceblue;
+  background-color: rgb(223, 239, 252);
   border-radius: 9px;
 }
 
 .active-link i {
   color: #3498db;
 }
+
 </style>
