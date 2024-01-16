@@ -3,26 +3,29 @@
     <SideBar />
     <main>
       <div class="admin-dashboard">
-    <div class="dashboard-card">
-      <h2>Total Posts</h2>
-      <p>9</p>
-    </div>
-
-    <div class="dashboard-card">
-      <h2>Total Contacts</h2>
-      <p>39</p>
-    </div>
-
-    <div class="dashboard-card">
-      <h2>Total Groups</h2>
-      <p>14</p>
-    </div>
-  </div>
+        <div class="dashboard-card">
+          <h2>Postitusi</h2>
+          <p>{{ posts.length }}</p>
+        </div>
+        <div class="dashboard-card">
+          <h2>Kontaktid</h2>
+          <p>{{ contacts.length }}</p>
+        </div>
+        <div class="dashboard-card">
+          <h2>Rühmad</h2>
+          <p>{{ groups.length }}</p>
+        </div>
+        <div class="dashboard-card">
+          <h2>Dokumendid</h2>
+          <p>{{ documents.length }}</p>
+        </div>
+      </div>
     </main>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
 
 export default {
@@ -31,7 +34,63 @@ export default {
     SideBar,
   },
   data() {
-    return {};
+    return {
+      posts: [],
+      contacts: [],
+      groups: [],
+      documents: [],
+    };
+  },
+  async created() {
+    await this.fetchPosts();
+    await this.fetchContacts();
+    await this.fetchGroups();
+    await this.fetchDocuments();
+  },
+  methods: {
+    async fetchPosts() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8000/api/posts/get_allPosts.php',
+          {
+            // withCredentials: true,
+          }
+        );
+        this.posts = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async fetchContacts() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8000/api/contacts/get_allContacts.php'
+        );
+        this.contacts = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async fetchGroups() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8000/api/groups/get_allGroups.php'
+        );
+        this.groups = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async fetchDocuments() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8000/api/documents/get_allDocuments.php'
+        );
+        this.documents = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
