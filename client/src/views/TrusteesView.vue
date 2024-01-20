@@ -18,7 +18,6 @@
             <th scope="col">#</th>
             <th scope="col">Nimi</th>
             <th scope="col">Rühm</th>
-            <th scope="col">E-POSTIAADRESS</th>
           </tr>
         </thead>
         <tbody>
@@ -26,7 +25,6 @@
             <th scope="row">{{ i + 1 }}</th>
             <td>{{ trustee.name }}</td>
             <td>{{ trustee.table_group_name }}</td>
-            <td>kerstinsireli@gmail.com</td>
           </tr>
         </tbody>
       </table>
