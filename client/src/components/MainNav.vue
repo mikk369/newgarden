@@ -1,6 +1,9 @@
 <template>
   <nav>
     <ul class="nav-list">
+      <li class="loggedIn-user">
+          <span>Logged in username</span>
+      </li>
       <li class="side-nav-links">
         <router-link class="link-color-second" to="/admin"
         :class="{'active-link': $route.path === '/admin' }">
@@ -65,9 +68,19 @@ import axios from 'axios';
 export default {
   name: 'MainNav',
   data() {
-    return {};
+    return {
+      username: null
+    };
   },
   methods: {
+    async loggedInUsername() {
+      try {
+        const response = await axios.get('http://localhost:8000/api/users/login.php');
+          console.log(response);
+      } catch (error) {
+        
+      }
+    },
       async Logout() {
         try {
           const response = await axios.post(
@@ -92,6 +105,9 @@ export default {
   flex-direction: column;
   gap: 0.8rem;
   border-radius: 5rempx;
+}
+.loggedIn-user{
+  text-decoration: none;
 }
 .side-nav-links,
 :link,
