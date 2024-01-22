@@ -46,25 +46,21 @@ while ($row = mysqli_fetch_assoc($resultSet)) {
     // If the group is not already in the array, add it
     if (!isset($data[$group_id])) {
         $data[$group_id] = [
-            'key' => $group_id,
-            'data' => [
-                'group_name' => $row['group_name'],
-                'phone' => $row['phone'],
-            ],
+            'id' => $group_id,
+            'group_name' => $row['group_name'],
+            'phone' => $row['phone'],
             'professions' => [],
         ];
     }
 
     // Add the profession details to the professions array
     $data[$group_id]['professions'][] = [
-        'key' => $group_id . '-' . count(($data[$group_id]['professions'])),
-        'data' => [
-            'teacher_1' => $row['teacher_1'],
-            'teacher_2' => $row['teacher_2'],
-            'assistant_teacher' => $row['assistant_teacher'],
-            'assistant' => $row['assistant'],
-            'special_teacher' => $row['special_teacher'],
-        ],
+        'id' => $group_id,
+        'teacher_1' => $row['teacher_1'],
+        'teacher_2' => $row['teacher_2'],
+        'assistant_teacher' => $row['assistant_teacher'],
+        'assistant' => $row['assistant'],
+        'special_teacher' => $row['special_teacher'],
     ];
 }
 
