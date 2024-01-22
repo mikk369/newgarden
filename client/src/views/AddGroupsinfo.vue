@@ -52,23 +52,23 @@
         <button class="form-button">Lisa kontakt</button>
       </form>
       <section>
-        <h1>Lisatud kontaktid</h1>
+        <h1>Lisatud rühmad</h1>
         <!-- DataTable section -->
-    <DataTable v-model:expandedRows="expandedRows" :value="groups" dataKey="id" 
-        @rowExpand="onRowExpand" @rowCollapse="onRowCollapse">
+    <DataTable v-model:expandedRows="expandedRows" :value="groups" dataKey="id">
       <!-- DataTable columns -->
       <Column expander style="width: 5rem" />
-      <Column field="group_name" header="Group Name"></Column>
-      <!-- Add other columns as needed -->
-
+      <Column field="group_name" header="Rühma nimi"></Column>
       <!-- Expansion template -->
       <template #expansion="slotProps">
         <div class="p-3">
-          <h5>Professions for {{ slotProps.data.group_name }}</h5>
+          <h5>{{ slotProps.data.group_name }} töötajad</h5>
           <DataTable :value="slotProps.data.professions">
             <!-- Professions columns -->
-            <Column field="teacher_1" header="Teacher 1"></Column>
-            <Column field="teacher_2" header="Teacher 2"></Column>
+            <Column field="teacher_1" header="Õpetaja"></Column>
+            <Column field="teacher_2" header="Õpetaja"></Column>
+            <Column field="assistant_teacher" header="Õpetaja abi"></Column>
+            <Column field="assistant" header="Assistent"></Column>
+            <Column field="special_teacher" header="Eripedagoog"></Column>
             <!-- Add other columns for professions as needed -->
           </DataTable>
         </div>
@@ -82,8 +82,6 @@
 <script>
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
-import { ref, onMounted } from 'vue';
-
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
 
@@ -92,7 +90,7 @@ export default {
   components: {
     SideBar,
     DataTable,
-    Column
+    Column,
   },
   data() {
     return {
@@ -112,12 +110,6 @@ export default {
     await this.fetchGroups();
   },
   methods: {
-    onRowExpand(event) {
-            this.$toast.add({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
-        },
-    onRowCollapse(event) {
-            this.$toast.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
-        },
     async addGroup() {
       try {
         const formData = new FormData();
