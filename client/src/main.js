@@ -8,12 +8,14 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import 'primeicons/primeicons.css';
 import 'primevue/resources/themes/saga-blue/theme.css'
+import PrimeVue from 'primevue/config';
 
 const app = createApp(App);
 app.use(VueGtag, {
   config: { id: 'G-2SYHWYQ5K5' },
 });
 app.use(router);
+app.use(PrimeVue);
 app.component('FooterView', FooterView);
 app.component('HeaderView', HeaderView);
 app.mixin({
