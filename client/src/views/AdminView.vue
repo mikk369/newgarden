@@ -42,51 +42,22 @@ export default {
     };
   },
   async created() {
-    await this.fetchPosts();
-    await this.fetchContacts();
-    await this.fetchGroups();
-    await this.fetchDocuments();
+    await this.fetchData();
   },
   methods: {
-    async fetchPosts() {
+    async fetchData() {
       try {
-        const response = await axios.get(
-          'http://localhost:8000/api/posts/get_allPosts.php',
-          {
-            // withCredentials: true,
-          }
-        );
-        this.posts = response.data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async fetchContacts() {
-      try {
-        const response = await axios.get(
-          'http://localhost:8000/api/contacts/get_allContacts.php'
-        );
-        this.contacts = response.data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async fetchGroups() {
-      try {
-        const response = await axios.get(
-          'http://localhost:8000/api/groups/get_allGroups.php'
-        );
-        this.groups = response.data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async fetchDocuments() {
-      try {
-        const response = await axios.get(
-          'http://localhost:8000/api/documents/get_allDocuments.php'
-        );
-        this.documents = response.data;
+        const [postsResponse, contactsResponse, groupsResponse, documentsResponse] = await Promise.all([
+          axios.get('http://localhost:8000/api/posts/get_allPosts.php'),
+          axios.get('http://localhost:8000/api/contacts/get_allContacts.php'),
+          axios.get('http://localhost:8000/api/groups/get_allGroups.php'),
+          axios.get('http://localhost:8000/api/documents/get_allDocuments.php'),
+        ]);
+
+        this.posts = postsResponse.data;
+        this.contacts = contactsResponse.data;
+        this.groups = groupsResponse.data;
+        this.documents = documentsResponse.data;
       } catch (error) {
         console.log(error);
       }
