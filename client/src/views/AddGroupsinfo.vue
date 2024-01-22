@@ -53,49 +53,51 @@
       </form>
       <section>
         <h1>Lisatud kontaktid</h1>
-        <ul class="added-list-items">
-          <li
-            class="list-items"
-            v-for="group in groups"
-            :key="group.id">
-            <div class="list-content">{{ group.data.group_name }}</div>
-            <div class="list-actions">
-              <button @click="editContact(group)" class="edit-button">
-                Muuda
-              </button>
-              <button @click="deleteContact(group.id)" class="delete-button">
-                Kustuta
-              </button>
-            </div>
-          </li>
-        </ul>
-        <!-- PRIMEVUE TREETABLE  -->
-        <!-- <TreeTable :value="groups">
-          <Column field="name" header="Name" expander></Column>
-        </TreeTable> -->
+        <!-- DataTable section -->
+    <DataTable v-model:expandedRows="expandedRows" :value="groups" dataKey="id" 
+        @rowExpand="onRowExpand" @rowCollapse="onRowCollapse">
+      <!-- DataTable columns -->
+      <Column expander style="width: 5rem" />
+      <Column field="group_name" header="Group Name"></Column>
+      <!-- Add other columns as needed -->
+
+      <!-- Expansion template -->
+      <template #expansion="slotProps">
+        <div class="p-3">
+          <h5>Professions for {{ slotProps.data.group_name }}</h5>
+          <DataTable :value="slotProps.data.professions">
+            <!-- Professions columns -->
+            <Column field="teacher_1" header="Teacher 1"></Column>
+            <Column field="teacher_2" header="Teacher 2"></Column>
+            <!-- Add other columns for professions as needed -->
+          </DataTable>
+        </div>
+      </template>
+    </DataTable>
       </section>
     </main>
   </div>
 </template>
 
 <script>
-import TreeTable from 'primevue/treetable';
 import Column from 'primevue/column';
+import DataTable from 'primevue/datatable';
+import { ref, onMounted } from 'vue';
+
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
-// import {onMounted } from 'vue';
-// import { NodeService } from '../../../api/Nodeservice'
 
 export default {
   name: 'AddGroupsinfo',
   components: {
     SideBar,
-    // TreeTable,
-    // Column,
+    DataTable,
+    Column
   },
   data() {
     return {
       groups: [],
+      expandedRows: [],
       group_name: '',
       teacher_1: '',
       teacher_2: '',
@@ -103,25 +105,19 @@ export default {
       assistant: '',
       special_teacher: '',
       phone: '',
-      // nodes: []
+
     };
   },
   async created() {
     await this.fetchGroups();
   },
-  // setup() {
-  //   onMounted(async () => {
-  //     const data = await NodeService.getTreeTableNodes();
-  //     console.log(data);
-
-  //     this.nodes = data; // Update the nodes property
-  //   });
-
-  //   // Your other setup logic if needed
-
-  //   return {};
-  // },
   methods: {
+    onRowExpand(event) {
+            this.$toast.add({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
+        },
+    onRowCollapse(event) {
+            this.$toast.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
+        },
     async addGroup() {
       try {
         const formData = new FormData();
@@ -154,7 +150,7 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
   }
 };
 </script>
