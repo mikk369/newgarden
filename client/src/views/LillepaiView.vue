@@ -17,15 +17,15 @@
           alt="Jane"
           style="max-width: 100%" />
           <div class="lower-card">
-            <h3>{{ group.data.group_name }}</h3>
-            <div v-for="profession in group.data.professions" :key="group.id">
+            <h3>{{ group.group_name }}</h3>
+            <div v-for="profession in group.professions" :key="group.id">
               <p v-if="profession.teacher_1">Õpetaja: {{ profession.teacher_1 }}</p>
               <p v-if="profession.teacher_2">Õpetaja: {{ profession.teacher_2 }}</p>
               <p v-if="profession.assistant_teacher">Õpetaja abi: {{ profession.assistant_teacher }}</p>
               <p v-if="profession.assistant">Assistent: {{ profession.assistant }}</p>
               <p v-if="profession.special_teacher">Eripedagoog: {{ profession.special_teacher }}</p>
             </div>
-            <p>Telefon: {{ group.data.phone }}</p>
+            <p>Telefon: {{ group.phone }}</p>
           </div>
       </div>
     </div>
