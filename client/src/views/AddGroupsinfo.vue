@@ -52,36 +52,30 @@
         <button class="form-button">Lisa kontakt</button>
       </form>
       <section>
-        <h1>Lisatud rühmad</h1>
-        <!-- DataTable section -->
-    <DataTable v-model:expandedRows="expandedRows" :value="groups" dataKey="id">
-      <!-- DataTable columns -->
-      <Column expander style="width: 5rem" />
-      <Column field="group_name" header="Rühma nimi"></Column>
-      <!-- Expansion template -->
-      <template #expansion="slotProps">
-        <div class="p-3">
-          <h5>{{ slotProps.data.group_name }} töötajad</h5>
-          <DataTable :value="slotProps.data.professions">
-            <!-- Professions columns -->
-            <Column field="teacher_1" header="Õpetaja" v-if="slotProps.data.professions[0].teacher_1"></Column>
-            <Column field="teacher_2" header="Õpetaja" v-if="slotProps.data.professions[0].teacher_2"></Column>
-            <Column field="assistant_teacher" header="Õpetaja abi" v-if="slotProps.data.professions[0].assistant_teacher"></Column>
-            <Column field="assistant" header="Assistent" v-if="slotProps.data.professions[0].assistant"></Column>
-            <Column field="special_teacher" header="Eripedagoog" v-if="slotProps.data.professions[0].special_teacher"></Column>
-            <!-- Add other columns for professions as needed -->
-          </DataTable>
-        </div>
-      </template>
-    </DataTable>
+        <h1>Lisatud kontaktid</h1>
+        <ul class="added-list-items">
+          <li
+            class="list-items"
+            v-for="group in groups"
+            :key="group.id">
+            <div class="list-content">{{ group.group_name }}</div>
+            <div class="list-actions">
+              <button @click="editContact(group)" class="edit-button">
+                Muuda
+              </button>
+              <button @click="deleteContact(group.id)" class="delete-button">
+                Kustuta
+              </button>
+            </div>
+          </li>
+        </ul>
       </section>
     </main>
   </div>
 </template>
 
 <script>
-import Column from 'primevue/column';
-import DataTable from 'primevue/datatable';
+
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
 
@@ -89,13 +83,11 @@ export default {
   name: 'AddGroupsinfo',
   components: {
     SideBar,
-    DataTable,
-    Column,
+ 
   },
   data() {
     return {
       groups: [],
-      expandedRows: [],
       group_name: '',
       teacher_1: '',
       teacher_2: '',

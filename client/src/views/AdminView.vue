@@ -20,11 +20,37 @@
           <p>{{ documents.length }}</p>
         </div>
       </div>
+      <section>
+        <h1>Lisatud rühmad</h1>
+          <!-- DataTable section -->
+        <DataTable v-model:expandedRows="expandedRows" :value="groups" dataKey="id">
+          <!-- DataTable columns -->
+          <Column expander style="width: 5rem" />
+          <Column field="group_name" header="Rühma nimi"></Column>
+          <!-- Expansion template -->
+          <template #expansion="slotProps">
+            <div class="p-3">
+              <h5>{{ slotProps.data.group_name }} töötajad</h5>
+              <DataTable :value="slotProps.data.professions">
+                <!-- Professions columns -->
+                <Column field="teacher_1" header="Õpetaja" v-if="slotProps.data.professions[0].teacher_1"></Column>
+                <Column field="teacher_2" header="Õpetaja" v-if="slotProps.data.professions[0].teacher_2"></Column>
+                <Column field="assistant_teacher" header="Õpetaja abi" v-if="slotProps.data.professions[0].assistant_teacher"></Column>
+                <Column field="assistant" header="Assistent" v-if="slotProps.data.professions[0].assistant"></Column>
+                <Column field="special_teacher" header="Eripedagoog" v-if="slotProps.data.professions[0].special_teacher"></Column>
+                <!-- Add other columns for professions as needed -->
+              </DataTable>
+            </div>
+          </template>
+        </DataTable>
+      </section>
     </main>
   </div>
 </template>
 
 <script>
+import Column from 'primevue/column';
+import DataTable from 'primevue/datatable';
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
 
@@ -32,6 +58,8 @@ export default {
   name: 'AdminView',
   components: {
     SideBar,
+    DataTable,
+    Column,
   },
   data() {
     return {
@@ -39,6 +67,7 @@ export default {
       contacts: [],
       groups: [],
       documents: [],
+      expandedRows: [],
     };
   },
   async created() {
