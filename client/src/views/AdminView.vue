@@ -27,6 +27,7 @@
           <!-- DataTable columns -->
           <Column expander style="width: 5rem" />
           <Column field="group_name" header="Rühma nimi"></Column>
+          <Column field="phone" header="Telefon"></Column>
           <!-- Expansion template -->
           <template #expansion="slotProps">
             <div class="p-3">
