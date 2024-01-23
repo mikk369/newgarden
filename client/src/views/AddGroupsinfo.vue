@@ -64,11 +64,11 @@
           <h5>{{ slotProps.data.group_name }} töötajad</h5>
           <DataTable :value="slotProps.data.professions">
             <!-- Professions columns -->
-            <Column field="teacher_1" header="Õpetaja"></Column>
-            <Column field="teacher_2" header="Õpetaja"></Column>
-            <Column field="assistant_teacher" header="Õpetaja abi"></Column>
-            <Column field="assistant" header="Assistent"></Column>
-            <Column field="special_teacher" header="Eripedagoog"></Column>
+            <Column field="teacher_1" header="Õpetaja" v-if="slotProps.data.professions[0].teacher_1"></Column>
+            <Column field="teacher_2" header="Õpetaja" v-if="slotProps.data.professions[0].teacher_2"></Column>
+            <Column field="assistant_teacher" header="Õpetaja abi" v-if="slotProps.data.professions[0].assistant_teacher"></Column>
+            <Column field="assistant" header="Assistent" v-if="slotProps.data.professions[0].assistant"></Column>
+            <Column field="special_teacher" header="Eripedagoog" v-if="slotProps.data.professions[0].special_teacher"></Column>
             <!-- Add other columns for professions as needed -->
           </DataTable>
         </div>
