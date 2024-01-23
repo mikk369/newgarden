@@ -54,7 +54,7 @@ while ($row = mysqli_fetch_assoc($resultSet)) {
     }
 
     // Add the profession details to the professions array
-    $data[$group_id]['professions'][] = [
+     $profession = [
         'id' => $group_id,
         'teacher_1' => $row['teacher_1'],
         'teacher_2' => $row['teacher_2'],
@@ -62,6 +62,13 @@ while ($row = mysqli_fetch_assoc($resultSet)) {
         'assistant' => $row['assistant'],
         'special_teacher' => $row['special_teacher'],
     ];
+
+    // Filter out empty strings from the profession array
+    $filteredProfessions = array_filter($profession, function ($value) {
+        return $value !== '';
+    });
+
+    $data[$group_id]['professions'][] = $filteredProfessions;
 }
 
 // Convert the associative array to a numeric array
