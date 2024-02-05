@@ -62,10 +62,7 @@
       <section>
         <h1>Lisatud kontaktid</h1>
         <ul class="added-list-items">
-          <li
-            class="list-items"
-            v-for="contact in contacts"
-            :key="contact.id">
+          <li class="list-items" v-for="contact in contacts" :key="contact.id">
             <div class="list-content">{{ contact.name }}</div>
             <div class="list-actions">
               <button @click="editContact(contact)" class="edit-button">
@@ -136,6 +133,7 @@
 <script>
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default {
   name: 'AddContactInfo',
@@ -178,10 +176,7 @@ export default {
         formData.append('phone_2', this.phone_2);
         formData.append('email', this.email);
 
-        await axios.post(
-          'http://localhost:8000/api/contacts/add_contacts.php',
-          formData
-        );
+        await axios.post(`${apiUrl}/contacts/add_contacts.php`, formData);
         this.image = '';
         this.name = '';
         this.jobTitle = '';
@@ -197,7 +192,7 @@ export default {
     async fetchContacts() {
       try {
         const response = await axios.get(
-          'http://localhost:8000/api/contacts/get_allContacts.php'
+          `${apiUrl}/contacts/get_allContacts.php`
         );
         this.contacts = response.data;
       } catch (error) {
@@ -207,7 +202,7 @@ export default {
     async deleteContact(contactId) {
       try {
         await axios.delete(
-          `http://localhost:8000/api/contacts/delete_contact.php?id=${contactId}`
+          `${apiUrl}/contacts/delete_contact.php?id=${contactId}`
         );
         await this.fetchContacts();
       } catch (error) {
@@ -237,7 +232,7 @@ export default {
           email: this.editEmail,
         };
         await axios.patch(
-          `http://localhost:8000/api/contacts/update_contact.php?id=${this.id}`,
+          `${apiUrl}/contacts/update_contact.php?id=${this.id}`,
           formData
         );
         // fetch contacts after updating
@@ -257,7 +252,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 main {
   background-color: var(--color-grey-50);
   padding: 4rem 4.8rem 6.4rem;

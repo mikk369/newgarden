@@ -2,7 +2,9 @@
   <div class="grid-container">
     <SideBar />
     <main>
-      <form class="form-info" @submit.prevent="addDocument"
+      <form
+        class="form-info"
+        @submit.prevent="addDocument"
         enctype="multipart/form-data">
         <h1>Lisa Dokument</h1>
         <input
@@ -10,28 +12,31 @@
           class="form-title"
           placeholder="Dokumendi pealkiri"
           v-model="title" />
-        <label v-if=" selectedOption === 'fail'"  class="input-label" for="image">Valige fail</label>
-        <input v-if="selectedOption === 'fail'"
-            class="document-input"
-            type="file"
-            name="file"
-            show-size
-            accept="application/pdf, application/msword, 
+        <label v-if="selectedOption === 'fail'" class="input-label" for="image"
+          >Valige fail</label
+        >
+        <input
+          v-if="selectedOption === 'fail'"
+          class="document-input"
+          type="file"
+          name="file"
+          show-size
+          accept="application/pdf, application/msword, 
             application/vnd.openxmlformats-officedocument.wordprocessingml.document, 
             application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            @change="selectFile" />
-          <input
-            v-if="selectedOption === 'link'"
-            type="text"
-            class="form-title"
-            placeholder="Lehe URL"
-            v-model="link" />
-          <div class="radio-wrapper">
-            <label for="fail">Fail</label>
-                <RadioButton v-model="selectedOption" value="fail" inputId="fail" />
-            <label for="link">Link</label>
-                <RadioButton v-model="selectedOption" value="link" inputId="link"/>
-            </div>
+          @change="selectFile" />
+        <input
+          v-if="selectedOption === 'link'"
+          type="text"
+          class="form-title"
+          placeholder="Lehe URL"
+          v-model="link" />
+        <div class="radio-wrapper">
+          <label for="fail">Fail</label>
+          <RadioButton v-model="selectedOption" value="fail" inputId="fail" />
+          <label for="link">Link</label>
+          <RadioButton v-model="selectedOption" value="link" inputId="link" />
+        </div>
         <button class="form-button">Lisa dokument</button>
       </form>
       <section>
@@ -43,7 +48,9 @@
             :key="document.id">
             <div class="list-content">{{ document.title }}</div>
             <div class="list-actions">
-              <button @click="deleteDocument(document.id)" class="delete-button">
+              <button
+                @click="deleteDocument(document.id)"
+                class="delete-button">
                 Kustuta
               </button>
             </div>
@@ -58,6 +65,7 @@
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
 import RadioButton from 'primevue/radiobutton';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default {
   name: 'AddDocuments',
@@ -85,16 +93,15 @@ export default {
       try {
         const formData = new FormData();
         formData.append('title', this.title);
-        
-        // check if there is one or other 
+
+        // check if there is one or other
         if (this.file) {
           formData.append('file', this.file);
         } else if (this.link) {
           formData.append('link', this.link);
         }
 
-        await axios.post('http://localhost:8000/api/documents/add_documents.php',
-        formData);
+        await axios.post(`${apiUrl}/documents/add_documents.php`, formData);
         this.title = '';
         this.link = '';
         this.file = '';
@@ -104,21 +111,25 @@ export default {
     },
     async fetchDocuments() {
       try {
-        const response = await axios.get('http://localhost:8000/api/documents/get_allDocuments.php');
-        this.documents = response.data
+        const response = await axios.get(
+          `${apiUrl}/documents/get_allDocuments.php`
+        );
+        this.documents = response.data;
       } catch (error) {
         console.log(error);
       }
     },
-     async deleteDocument(documentId) {
+    async deleteDocument(documentId) {
       try {
-        await axios.delete(`http://localhost:8000/api/documents/delete_document.php?id=${documentId}`);
+        await axios.delete(
+          `${apiUrl}/documents/delete_document.php?id=${documentId}`
+        );
         await this.fetchDocuments();
       } catch (error) {
         console.log(error);
       }
-     }
-  }
+    },
+  },
 };
 </script>
 
@@ -155,7 +166,7 @@ main {
   width: 50%;
   border-radius: 9px;
 }
-.radio-wrapper{
+.radio-wrapper {
   display: flex;
   justify-content: space-between;
   width: 9rem;

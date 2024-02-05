@@ -22,8 +22,11 @@
       </div>
       <section>
         <h1>Lisatud rühmad</h1>
-          <!-- DataTable section -->
-        <DataTable v-model:expandedRows="expandedRows" :value="groups" dataKey="id">
+        <!-- DataTable section -->
+        <DataTable
+          v-model:expandedRows="expandedRows"
+          :value="groups"
+          dataKey="id">
           <!-- DataTable columns -->
           <Column expander style="width: 5rem" />
           <Column field="group_name" header="Rühma nimi"></Column>
@@ -34,11 +37,28 @@
               <h5>{{ slotProps.data.group_name }} töötajad</h5>
               <DataTable :value="slotProps.data.professions">
                 <!-- Professions columns -->
-                <Column field="teacher_1" header="Õpetaja" v-if="slotProps.data.professions[0].teacher_1"></Column>
-                <Column field="teacher_2" header="Õpetaja" v-if="slotProps.data.professions[0].teacher_2"></Column>
-                <Column field="assistant_teacher" header="Õpetaja abi" v-if="slotProps.data.professions[0].assistant_teacher"></Column>
-                <Column field="assistant" header="Assistent" v-if="slotProps.data.professions[0].assistant"></Column>
-                <Column field="special_teacher" header="Eripedagoog" v-if="slotProps.data.professions[0].special_teacher"></Column>
+                <Column
+                  field="teacher_1"
+                  header="Õpetaja"
+                  v-if="slotProps.data.professions[0].teacher_1"></Column>
+                <Column
+                  field="teacher_2"
+                  header="Õpetaja"
+                  v-if="slotProps.data.professions[0].teacher_2"></Column>
+                <Column
+                  field="assistant_teacher"
+                  header="Õpetaja abi"
+                  v-if="
+                    slotProps.data.professions[0].assistant_teacher
+                  "></Column>
+                <Column
+                  field="assistant"
+                  header="Assistent"
+                  v-if="slotProps.data.professions[0].assistant"></Column>
+                <Column
+                  field="special_teacher"
+                  header="Eripedagoog"
+                  v-if="slotProps.data.professions[0].special_teacher"></Column>
                 <!-- Add other columns for professions as needed -->
               </DataTable>
             </div>
@@ -54,6 +74,7 @@ import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default {
   name: 'AdminView',
@@ -77,11 +98,16 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const [postsResponse, contactsResponse, groupsResponse, documentsResponse] = await Promise.all([
-          axios.get('http://localhost:8000/api/posts/get_allPosts.php'),
-          axios.get('http://localhost:8000/api/contacts/get_allContacts.php'),
-          axios.get('http://localhost:8000/api/groups/get_allGroups.php'),
-          axios.get('http://localhost:8000/api/documents/get_allDocuments.php'),
+        const [
+          postsResponse,
+          contactsResponse,
+          groupsResponse,
+          documentsResponse,
+        ] = await Promise.all([
+          axios.get(`${apiUrl}/posts/get_allPosts.php`),
+          axios.get(`${apiUrl}/contacts/get_allContacts.php`),
+          axios.get(`${apiUrl}/groups/get_allGroups.php`),
+          axios.get(`${apiUrl}/documents/get_allDocuments.php`),
         ]);
 
         this.posts = postsResponse.data;

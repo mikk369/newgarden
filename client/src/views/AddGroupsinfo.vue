@@ -7,57 +7,54 @@
         @submit.prevent="addGroup"
         enctype="multipart/form-data">
         <h1 class="form-heading">Lisa rühm</h1>
-          <input
-            class="edit-contact-input-class"
-            type="text"
-            name="group_name"
-            placeholder="Rühma nimi"
-            v-model="group_name" />
-          <input
-            class="edit-contact-input-class"
-            type="text"
-            name="teacher_1"
-            placeholder="Õpetaja"
-            v-model="teacher_1" />
-          <input
-            class="edit-contact-input-class"
-            type="text"
-            name="teacher_2"
-            placeholder="Õpetaja"
-            v-model="teacher_2" />
-          <input
-            class="edit-contact-input-class"
-            type="text"
-            name="assistant_teacher"
-            placeholder="Õpetaja abi"
-            v-model="assistant_teacher" />
-          <input
-            class="edit-contact-input-class"
-            type="text"
-            name="assistant"
-            placeholder="Assistent"
-            v-model="assistant" />
-          <input
-            class="edit-contact-input-class"
-            type="text"
-            name="special_teacher"
-            placeholder="Eripedagoog"
-            v-model="special_teacher" />
-          <input
-            class="edit-contact-input-class"
-            type="text"
-            name="phone"
-            placeholder="Telefon"
-            v-model="phone" />
+        <input
+          class="edit-contact-input-class"
+          type="text"
+          name="group_name"
+          placeholder="Rühma nimi"
+          v-model="group_name" />
+        <input
+          class="edit-contact-input-class"
+          type="text"
+          name="teacher_1"
+          placeholder="Õpetaja"
+          v-model="teacher_1" />
+        <input
+          class="edit-contact-input-class"
+          type="text"
+          name="teacher_2"
+          placeholder="Õpetaja"
+          v-model="teacher_2" />
+        <input
+          class="edit-contact-input-class"
+          type="text"
+          name="assistant_teacher"
+          placeholder="Õpetaja abi"
+          v-model="assistant_teacher" />
+        <input
+          class="edit-contact-input-class"
+          type="text"
+          name="assistant"
+          placeholder="Assistent"
+          v-model="assistant" />
+        <input
+          class="edit-contact-input-class"
+          type="text"
+          name="special_teacher"
+          placeholder="Eripedagoog"
+          v-model="special_teacher" />
+        <input
+          class="edit-contact-input-class"
+          type="text"
+          name="phone"
+          placeholder="Telefon"
+          v-model="phone" />
         <button class="form-button">Lisa kontakt</button>
       </form>
       <section>
         <h1>Lisatud kontaktid</h1>
         <ul class="added-list-items">
-          <li
-            class="list-items"
-            v-for="group in groups"
-            :key="group.id">
+          <li class="list-items" v-for="group in groups" :key="group.id">
             <div class="list-content">{{ group.group_name }}</div>
             <div class="list-actions">
               <button @click="editContact(group)" class="edit-button">
@@ -75,15 +72,14 @@
 </template>
 
 <script>
-
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default {
   name: 'AddGroupsinfo',
   components: {
     SideBar,
- 
   },
   data() {
     return {
@@ -95,7 +91,6 @@ export default {
       assistant: '',
       special_teacher: '',
       phone: '',
-
     };
   },
   async created() {
@@ -113,8 +108,7 @@ export default {
         formData.append('special_teacher', this.special_teacher);
         formData.append('phone', this.phone);
 
-        await axios.post('http://localhost:8000/api/groups/add_groups.php',
-        formData);
+        await axios.post(`${apiUrl}/groups/add_groups.php`, formData);
         this.group_name = '';
         this.teacher_1 = '';
         this.teacher_2 = '';
@@ -128,14 +122,14 @@ export default {
     },
     async fetchGroups() {
       try {
-        const response = await axios.get('http://localhost:8000/api/groups/get_allGroups.php');
+        const response = await axios.get(`${apiUrl}/groups/get_allGroups.php`);
         this.groups = response.data;
         console.log(response.data);
       } catch (error) {
         console.log(error);
       }
     },
-  }
+  },
 };
 </script>
 
@@ -183,7 +177,6 @@ main {
   border: 1px solid #ccc;
   border-radius: 9px;
   margin-bottom: 1.5rem;
-
 }
 .form-button {
   padding: 0.8rem 1.5rem;
