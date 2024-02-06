@@ -108,7 +108,7 @@ export default {
         formData.append('special_teacher', this.special_teacher);
         formData.append('phone', this.phone);
 
-        await axios.post(`${apiUrl}/groups/add_groups.php`, formData);
+        await axios.post(`${apiUrl}api/groups/add_groups.php`, formData);
         this.group_name = '';
         this.teacher_1 = '';
         this.teacher_2 = '';
@@ -122,7 +122,9 @@ export default {
     },
     async fetchGroups() {
       try {
-        const response = await axios.get(`${apiUrl}/groups/get_allGroups.php`);
+        const response = await axios.get(
+          `${apiUrl}api/groups/get_allGroups.php`
+        );
         this.groups = response.data;
         console.log(response.data);
       } catch (error) {

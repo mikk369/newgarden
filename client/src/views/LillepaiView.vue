@@ -16,17 +16,27 @@
           src="./../photos/pailasteaed.jpg"
           alt="Jane"
           style="max-width: 100%" />
-          <div class="lower-card">
-            <h3>{{ group.group_name }}</h3>
-            <div v-for="profession in group.professions" :key="group.id">
-              <p v-if="profession.teacher_1">Õpetaja: {{ profession.teacher_1 }}</p>
-              <p v-if="profession.teacher_2">Õpetaja: {{ profession.teacher_2 }}</p>
-              <p v-if="profession.assistant_teacher">Õpetaja abi: {{ profession.assistant_teacher }}</p>
-              <p v-if="profession.assistant">Assistent: {{ profession.assistant }}</p>
-              <p v-if="profession.special_teacher">Eripedagoog: {{ profession.special_teacher }}</p>
-            </div>
-            <p>Telefon: {{ group.phone }}</p>
+        <div class="lower-card">
+          <h3>{{ group.group_name }}</h3>
+          <div v-for="profession in group.professions" :key="group.id">
+            <p v-if="profession.teacher_1">
+              Õpetaja: {{ profession.teacher_1 }}
+            </p>
+            <p v-if="profession.teacher_2">
+              Õpetaja: {{ profession.teacher_2 }}
+            </p>
+            <p v-if="profession.assistant_teacher">
+              Õpetaja abi: {{ profession.assistant_teacher }}
+            </p>
+            <p v-if="profession.assistant">
+              Assistent: {{ profession.assistant }}
+            </p>
+            <p v-if="profession.special_teacher">
+              Eripedagoog: {{ profession.special_teacher }}
+            </p>
           </div>
+          <p>Telefon: {{ group.phone }}</p>
+        </div>
       </div>
     </div>
     <FooterView />
@@ -35,11 +45,13 @@
 
 <script>
 import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 export default {
   name: 'ContactView',
   data() {
     return {
-      groups: []
+      groups: [],
     };
   },
   async created() {
@@ -48,14 +60,15 @@ export default {
   methods: {
     async fetchGroups() {
       try {
-        const response = await axios.get('http://localhost:8000/api/groups/get_allGroups.php');
+        const response = await axios.get(
+          `${apiUrl}api/groups/get_allGroups.php`
+        );
         this.groups = response.data;
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -118,7 +131,7 @@ export default {
 .card img {
   margin-bottom: 20px;
 }
-.lower-card{
+.lower-card {
   text-align: center;
 }
 h3 {

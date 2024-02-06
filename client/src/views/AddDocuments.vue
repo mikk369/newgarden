@@ -101,7 +101,7 @@ export default {
           formData.append('link', this.link);
         }
 
-        await axios.post(`${apiUrl}/documents/add_documents.php`, formData);
+        await axios.post(`${apiUrl}api/documents/add_documents.php`, formData);
         this.title = '';
         this.link = '';
         this.file = '';
@@ -112,7 +112,7 @@ export default {
     async fetchDocuments() {
       try {
         const response = await axios.get(
-          `${apiUrl}/documents/get_allDocuments.php`
+          `${apiUrl}api/documents/get_allDocuments.php`
         );
         this.documents = response.data;
       } catch (error) {
@@ -122,7 +122,7 @@ export default {
     async deleteDocument(documentId) {
       try {
         await axios.delete(
-          `${apiUrl}/documents/delete_document.php?id=${documentId}`
+          `${apiUrl}api/documents/delete_document.php?id=${documentId}`
         );
         await this.fetchDocuments();
       } catch (error) {

@@ -17,24 +17,27 @@
             accept="image/png, image/jpg, image/webp"
             @change="selectFile" />
         </div>
-          <input
-            class="form-title"
-            type="text"
-            name="name"
-            placeholder="Projekti pealkiri"
-            v-model="name" />
-          <textarea
-            class="form-textarea"
-            type="text"
-            name="Ametinimetus"
-            placeholder="Projekti Kirjeldus"
-            v-model="project_content" ></textarea>
+        <input
+          class="form-title"
+          type="text"
+          name="name"
+          placeholder="Projekti pealkiri"
+          v-model="name" />
+        <textarea
+          class="form-textarea"
+          type="text"
+          name="Ametinimetus"
+          placeholder="Projekti Kirjeldus"
+          v-model="project_content"></textarea>
         <button class="form-button">Lisa projekt</button>
       </form>
       <section>
         <h1>Lisatud projektid</h1>
         <ul class="all-added-posts">
-          <li class="added-post" v-for="projects in reversedPosts" :key="projects.id">
+          <li
+            class="added-post"
+            v-for="projects in reversedPosts"
+            :key="projects.id">
             <div class="post-content">{{ projects.name }}</div>
             <div class="post-actions">
               <button @click="editPost(post)" class="edit-button">Muuda</button>
@@ -52,6 +55,7 @@
 <script>
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default {
   name: 'AddProjectsInfo',
@@ -61,8 +65,8 @@ export default {
   data() {
     return {
       projects: [],
-      name: "",
-      project_content: "",
+      name: '',
+      project_content: '',
     };
   },
   async created() {
@@ -74,38 +78,34 @@ export default {
       return this.projects.slice().reverse();
     },
   },
-  methods:{
+  methods: {
     async fetchProjects() {
       try {
         const response = await axios.get(
-          'http://localhost:8000/api/projects/get_allProjects.php',
+          `${apiUrl}api/projects/get_allProjects.php`,
           {
             // withCredentials: true,
           }
-          );
+        );
         this.projects = response.data;
       } catch (error) {
         console.log(error);
       }
     },
-   async addProject(){
+    async addProject() {
       try {
         const formData = new FormData();
         formData.append('name', this.name);
         formData.append('project_content', this.project_content);
-        
-        await axios.post(
-          'http://localhost:8000/api/projects/add_projects.php',
-          formData
-        );
+
+        await axios.post(`${apiUrl}/projects/add_projects.php`, formData);
         this.name = '';
-        this.project_content = ''; 
+        this.project_content = '';
       } catch (error) {
         console.log(error);
       }
-    }
-  }
-
+    },
+  },
 };
 </script>
 

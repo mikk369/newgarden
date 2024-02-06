@@ -5,11 +5,13 @@
       <div class="links-wrapper">
         <h1 class="title">Dokumendid</h1>
         <!-- TODO:: make ul - li list -->
-        <div class="just-links" v-for="document in documents"
-        :key="document.id">
-            <a :href="getLink(document)" target="_blank">
-              <button class="link-background-hover">{{ document.title }}</button>
-            </a>
+        <div
+          class="just-links"
+          v-for="document in documents"
+          :key="document.id">
+          <a :href="getLink(document)" target="_blank">
+            <button class="link-background-hover">{{ document.title }}</button>
+          </a>
         </div>
       </div>
     </div>
@@ -19,6 +21,8 @@
 
 <script>
 import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 export default {
   data() {
     return {
@@ -31,8 +35,10 @@ export default {
   methods: {
     async fetchDocuments() {
       try {
-        const response = await axios.get('http://localhost:8000/api/documents/get_allDocuments.php');
-        this.documents = response.data
+        const response = await axios.get(
+          `${apiUrl}api/documents/get_allDocuments.php`
+        );
+        this.documents = response.data;
       } catch (error) {
         console.log(error);
       }
@@ -42,10 +48,10 @@ export default {
       if (document.link) {
         return document.link;
       } else if (document.document_folder) {
-        return 'http://localhost:8000/' + document.document_folder;
-      } 
+        return `${apiUrl}` + document.document_folder;
+      }
     },
-  }
+  },
 };
 </script>
 

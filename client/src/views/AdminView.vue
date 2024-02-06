@@ -104,10 +104,10 @@ export default {
           groupsResponse,
           documentsResponse,
         ] = await Promise.all([
-          axios.get(`${apiUrl}/posts/get_allPosts.php`),
-          axios.get(`${apiUrl}/contacts/get_allContacts.php`),
-          axios.get(`${apiUrl}/groups/get_allGroups.php`),
-          axios.get(`${apiUrl}/documents/get_allDocuments.php`),
+          axios.get(`${apiUrl}api/posts/get_allPosts.php`),
+          axios.get(`${apiUrl}api/contacts/get_allContacts.php`),
+          axios.get(`${apiUrl}api/groups/get_allGroups.php`),
+          axios.get(`${apiUrl}api/documents/get_allDocuments.php`),
         ]);
 
         this.posts = postsResponse.data;

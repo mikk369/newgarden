@@ -176,7 +176,7 @@ export default {
         formData.append('phone_2', this.phone_2);
         formData.append('email', this.email);
 
-        await axios.post(`${apiUrl}/contacts/add_contacts.php`, formData);
+        await axios.post(`${apiUrl}api/contacts/add_contacts.php`, formData);
         this.image = '';
         this.name = '';
         this.jobTitle = '';
@@ -192,7 +192,7 @@ export default {
     async fetchContacts() {
       try {
         const response = await axios.get(
-          `${apiUrl}/contacts/get_allContacts.php`
+          `${apiUrl}api/contacts/get_allContacts.php`
         );
         this.contacts = response.data;
       } catch (error) {
@@ -202,7 +202,7 @@ export default {
     async deleteContact(contactId) {
       try {
         await axios.delete(
-          `${apiUrl}/contacts/delete_contact.php?id=${contactId}`
+          `${apiUrl}api/contacts/delete_contact.php?id=${contactId}`
         );
         await this.fetchContacts();
       } catch (error) {
@@ -232,7 +232,7 @@ export default {
           email: this.editEmail,
         };
         await axios.patch(
-          `${apiUrl}/contacts/update_contact.php?id=${this.id}`,
+          `${apiUrl}api/contacts/update_contact.php?id=${this.id}`,
           formData
         );
         // fetch contacts after updating

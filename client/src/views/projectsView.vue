@@ -2,51 +2,50 @@
   <HeaderView />
   <div class="content-wrapper">
     <div class="heading">
-        <h1>Projektid</h1>
+      <h1>Projektid</h1>
+    </div>
+    <div class="card-grid">
+      <div class="no-posts-div" v-if="projects.length === 0">
+        <h3>Hetkel projekti puuduvad</h3>
       </div>
-  <div class="card-grid">
-        <div class="no-posts-div" v-if="projects.length === 0" >
-          <h3>Hetkel projekti puuduvad</h3>
-        </div>
-        <div
-        class="paragraph-card"
-        v-for="project in projects"
-        :key="project.id"
-        >
-        <router-link style="text-decoration: none" :to="{ params: {id: project.id}, 
-        name: 'project'}">
-         <div class="cards">
-           <h4>
-             <b>{{ project.name }}</b>
+      <div class="paragraph-card" v-for="project in projects" :key="project.id">
+        <router-link
+          style="text-decoration: none"
+          :to="{ params: { id: project.id }, name: 'project' }">
+          <div class="cards">
+            <h4>
+              <b>{{ project.name }}</b>
             </h4>
             <p class="lower-paragraph">{{ project.project_content }}</p>
           </div>
         </router-link>
-        </div>
       </div>
     </div>
+  </div>
   <FooterView />
 </template>
 
 <script>
 import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default {
   name: 'Projects',
   data() {
     return {
-      projects: []
+      projects: [],
     };
   },
   async created() {
-    const response = await axios.get("http://localhost:8000/api/projects/get_allProjects.php")
-    this.projects = response.data
-  }
+    const response = await axios.get(
+      `${apiUrl}api/projects/get_allProjects.php`
+    );
+    this.projects = response.data;
+  },
 };
 </script>
 
 <style>
-
 .heading {
   display: flex;
   justify-content: center;

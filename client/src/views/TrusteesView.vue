@@ -35,6 +35,8 @@
 
 <script scoped>
 import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 export default {
   name: 'TrusteesView',
 
@@ -45,7 +47,7 @@ export default {
   },
   async created() {
     const response = await axios.get(
-      'http://localhost:8000/api/trustees/get_alltrustees.php'
+      `${apiUrl}api/trustees/get_alltrustees.php`
     );
     this.trustees = response.data;
   },

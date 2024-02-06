@@ -1,20 +1,21 @@
 <template>
-    <div class="post-view">
-      <HeaderView />
-      <div class="post-container">
-        <div class="post-wrapper">
-          <div class="post-area">
-            <h1 class="post-title">{{ name }}</h1>
-            <p class="content">{{ project_content }}</p>
-          </div>
+  <div class="post-view">
+    <HeaderView />
+    <div class="post-container">
+      <div class="post-wrapper">
+        <div class="post-area">
+          <h1 class="post-title">{{ name }}</h1>
+          <p class="content">{{ project_content }}</p>
         </div>
       </div>
-      <FooterView />
     </div>
-  </template>
+    <FooterView />
+  </div>
+</template>
 
 <script>
 import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default {
   name: 'project',
@@ -30,21 +31,22 @@ export default {
     this.fetchPost();
   },
   methods: {
-   async fetchPost() {
-   try {
-    const response = await axios.get(`http://localhost:8000/api/projects/get_project.php?id=${this.id}`)
-    this.name = response.data.name,
-    this.project_content = response.data.project_content
-   } catch (error) {
-    console.log(error);
-   }
+    async fetchPost() {
+      try {
+        const response = await axios.get(
+          `${apiUrl}api/projects/get_project.php?id=${this.id}`
+        );
+        (this.name = response.data.name),
+          (this.project_content = response.data.project_content);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
 </script>
 
 <style>
-
 .post-container {
   min-height: 90vh;
 }

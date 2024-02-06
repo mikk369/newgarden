@@ -89,9 +89,12 @@ export default {
   methods: {
     async fetchPosts() {
       try {
-        const response = await axios.get(`${apiUrl}/posts/get_allPosts.php`, {
-          // withCredentials: true,
-        });
+        const response = await axios.get(
+          `${apiUrl}api/posts/get_allPosts.php`,
+          {
+            // withCredentials: true,
+          }
+        );
         this.posts = response.data;
       } catch (error) {
         console.log(error);
@@ -103,7 +106,7 @@ export default {
         formData.append('title', this.title);
         formData.append('content', this.content);
 
-        await axios.post(`${apiUrl}/posts/add_posts.php`, formData);
+        await axios.post(`${apiUrl}api/posts/add_posts.php`, formData);
 
         // fetch posts after new post is added so list is updated
         await this.fetchPosts();
@@ -117,7 +120,7 @@ export default {
 
     async deletePost(postId) {
       try {
-        await axios.delete(`${apiUrl}/posts/delete_post.php?id=${postId}`);
+        await axios.delete(`${apiUrl}api/posts/delete_post.php?id=${postId}`);
         await this.fetchPosts();
       } catch (error) {
         console.log(error);
@@ -141,7 +144,7 @@ export default {
           content: this.editContent,
         };
         await axios.patch(
-          `${apiUrl}/posts/update_post.php?id=${this.id}`,
+          `${apiUrl}api/posts/update_post.php?id=${this.id}`,
           formData
         );
 

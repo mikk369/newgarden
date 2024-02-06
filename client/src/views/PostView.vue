@@ -14,6 +14,7 @@
 </template>
 <script>
 import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default {
   name: 'PostView',
@@ -32,7 +33,7 @@ export default {
     fetchPost() {
       // Use Axios to make the GET request
       axios
-        .get(`http://localhost:8000/api/posts/get_post.php?id=${this.id}`)
+        .get(`${apiUrl}api/posts/get_post.php?id=${this.id}`)
         .then((response) => {
           // Update component data with fetched post data
           const data = response.data;
