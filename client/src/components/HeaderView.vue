@@ -1,8 +1,14 @@
 <template>
   <div class="header-view">
     <nav class="navbar navbar-expand-lg navbar-light navbar-text-color">
-      <img class="logo" src="./../photos/Paide_lasteaed_logo4.png" alt="PAIlasteaed logo" />
-      <div class="navbar-toggle" @click="toggleMenu" :class="{ 'is-active': showX }">
+      <img
+        class="logo"
+        src="./../photos/Paide_lasteaed_logo4.png"
+        alt="PAIlasteaed logo" />
+      <div
+        class="navbar-toggle"
+        @click="toggleMenu"
+        :class="{ 'is-active': showX }">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
@@ -58,7 +64,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 @media only screen and (min-width: 1200px) {
   .navbar {
     display: flex;

@@ -1,16 +1,18 @@
 <template>
-  <HeaderView />
+  <AdminHeader />
   <aside>
     <MainNav />
   </aside>
 </template>
 
 <script>
+import AdminHeader from './AdminHeader.vue';
 import MainNav from './MainNav.vue';
 export default {
   name: 'AdminView',
   components: {
     MainNav,
+    AdminHeader,
   },
   data() {
     return {};
