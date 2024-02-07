@@ -42,9 +42,9 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     if (password_verify($password, $row['password'])) {
         // Store user information in session
+        session_regenerate_id(true);
         $_SESSION['id'] = $row['id'];
         $_SESSION['email'] = $row['email'];
-        session_regenerate_id(true);
         
         $response['success'] = true;
         $response['message'] = 'Login successful';
