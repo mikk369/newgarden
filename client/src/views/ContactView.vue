@@ -14,7 +14,7 @@
         <div class="card" v-for="contact in contacts" :key="contact.id">
           <img
             class="contact-card-image"
-            :src="'http://localhost:8000/' + contact.image"
+            :src="`${baseUrl}${contact.image}`"
             alt="Jane"
             style="max-width: 100%" />
           <h3>{{ contact.name }}</h3>
@@ -38,9 +38,11 @@ export default {
   data() {
     return {
       contacts: [],
+      baseUrl: '',
     };
   },
   async created() {
+    this.baseUrl = config.baseUrl;
     const response = await axios.get(
       `${config.baseUrlApi}/contacts/get_allContacts.php`
     );

@@ -20,6 +20,7 @@
 
 <script>
 import axios from 'axios';
+import config from './../config.js';
 
 export default {
   name: 'AdminHeader',
@@ -35,7 +36,7 @@ export default {
     async loggedInUsername() {
       try {
         const response = await axios.get(
-          'http://localhost:8000/api/users/session.php'
+          `${config.baseUrlApi}/users/session.php`
         );
         console.log(response.data);
         // Check if the user is logged in
@@ -53,7 +54,7 @@ export default {
     async Logout() {
       try {
         const response = await axios.post(
-          'http://localhost:8000/api/users/logout.php'
+          `${config.baseUrlApi}/users/logout.php`
         );
         if (response.data.success) {
           this.$router.push('/login');
