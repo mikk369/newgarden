@@ -45,7 +45,7 @@
 
 <script>
 import axios from 'axios';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'ContactView',
@@ -61,7 +61,7 @@ export default {
     async fetchGroups() {
       try {
         const response = await axios.get(
-          `${apiUrl}api/groups/get_allGroups.php`
+          `${config.baseUrlApi}/groups/get_allGroups.php`
         );
         this.groups = response.data;
       } catch (error) {

@@ -133,7 +133,7 @@
 <script>
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'AddContactInfo',
@@ -176,7 +176,10 @@ export default {
         formData.append('phone_2', this.phone_2);
         formData.append('email', this.email);
 
-        await axios.post(`${apiUrl}api/contacts/add_contacts.php`, formData);
+        await axios.post(
+          `${config.baseUrlApi}/contacts/add_contacts.php`,
+          formData
+        );
         this.image = '';
         this.name = '';
         this.jobTitle = '';
@@ -192,7 +195,7 @@ export default {
     async fetchContacts() {
       try {
         const response = await axios.get(
-          `${apiUrl}api/contacts/get_allContacts.php`
+          `${config.baseUrlApi}/contacts/get_allContacts.php`
         );
         this.contacts = response.data;
       } catch (error) {
@@ -202,7 +205,7 @@ export default {
     async deleteContact(contactId) {
       try {
         await axios.delete(
-          `${apiUrl}api/contacts/delete_contact.php?id=${contactId}`
+          `${config.baseUrlApi}/contacts/delete_contact.php?id=${contactId}`
         );
         await this.fetchContacts();
       } catch (error) {
@@ -232,7 +235,7 @@ export default {
           email: this.editEmail,
         };
         await axios.patch(
-          `${apiUrl}api/contacts/update_contact.php?id=${this.id}`,
+          `${config.baseUrlApi}/contacts/update_contact.php?id=${this.id}`,
           formData
         );
         // fetch contacts after updating

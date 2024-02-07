@@ -65,7 +65,7 @@
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
 import RadioButton from 'primevue/radiobutton';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'AddDocuments',
@@ -101,7 +101,10 @@ export default {
           formData.append('link', this.link);
         }
 
-        await axios.post(`${apiUrl}api/documents/add_documents.php`, formData);
+        await axios.post(
+          `${config.baseUrlApi}/documents/add_documents.php`,
+          formData
+        );
         this.title = '';
         this.link = '';
         this.file = '';
@@ -112,7 +115,7 @@ export default {
     async fetchDocuments() {
       try {
         const response = await axios.get(
-          `${apiUrl}api/documents/get_allDocuments.php`
+          `${config.baseUrlApi}/documents/get_allDocuments.php`
         );
         this.documents = response.data;
       } catch (error) {
@@ -122,7 +125,7 @@ export default {
     async deleteDocument(documentId) {
       try {
         await axios.delete(
-          `${apiUrl}api/documents/delete_document.php?id=${documentId}`
+          `${config.baseUrlApi}/documents/delete_document.php?id=${documentId}`
         );
         await this.fetchDocuments();
       } catch (error) {

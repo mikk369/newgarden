@@ -21,7 +21,7 @@
 
 <script>
 import axios from 'axios';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   data() {
@@ -36,7 +36,7 @@ export default {
     async fetchDocuments() {
       try {
         const response = await axios.get(
-          `${apiUrl}api/documents/get_allDocuments.php`
+          `${config.baseUrlApi}/documents/get_allDocuments.php`
         );
         this.documents = response.data;
       } catch (error) {
@@ -48,7 +48,7 @@ export default {
       if (document.link) {
         return document.link;
       } else if (document.document_folder) {
-        return `${apiUrl}` + document.document_folder;
+        return `${config.baseUrl}${document.document_folder}`;
       }
     },
   },
@@ -92,6 +92,7 @@ export default {
   background-color: aliceblue;
   font-size: 23px;
   color: rgb(36, 36, 36);
+  cursor: pointer;
 }
 .link-background-hover:hover {
   box-shadow: 0 0px 3px 1px rgba(31, 31, 31, 0.3);

@@ -101,7 +101,7 @@
 
 <script>
 import axios from 'axios';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'LandingPage',
@@ -118,9 +118,12 @@ export default {
   },
 
   async created() {
-    const response = await axios.get(`${apiUrl}api/posts/get_allposts.php`, {
-      // withCredentials: true,
-    });
+    const response = await axios.get(
+      `${config.baseUrlApi}/posts/get_allposts.php`,
+      {
+        // withCredentials: true,
+      }
+    );
     this.posts = response.data;
   },
 };

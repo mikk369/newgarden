@@ -59,7 +59,7 @@
 <script>
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'AddPosts',
@@ -90,7 +90,7 @@ export default {
     async fetchPosts() {
       try {
         const response = await axios.get(
-          `${apiUrl}api/posts/get_allPosts.php`,
+          `${config.baseUrlApi}/posts/get_allPosts.php`,
           {
             // withCredentials: true,
           }
@@ -106,7 +106,7 @@ export default {
         formData.append('title', this.title);
         formData.append('content', this.content);
 
-        await axios.post(`${apiUrl}api/posts/add_posts.php`, formData);
+        await axios.post(`${config.baseUrlApi}/posts/add_posts.php`, formData);
 
         // fetch posts after new post is added so list is updated
         await this.fetchPosts();
@@ -120,7 +120,9 @@ export default {
 
     async deletePost(postId) {
       try {
-        await axios.delete(`${apiUrl}api/posts/delete_post.php?id=${postId}`);
+        await axios.delete(
+          `${config.baseUrlApi}/posts/delete_post.php?id=${postId}`
+        );
         await this.fetchPosts();
       } catch (error) {
         console.log(error);
@@ -144,7 +146,7 @@ export default {
           content: this.editContent,
         };
         await axios.patch(
-          `${apiUrl}api/posts/update_post.php?id=${this.id}`,
+          `${config.baseUrlApi}/posts/update_post.php?id=${this.id}`,
           formData
         );
 

@@ -34,7 +34,7 @@
 <script>
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'seaded',
@@ -50,7 +50,7 @@ export default {
   methods: {
     async register() {
       try {
-        axios.post(`${apiUrl}api/users/register.php`, {
+        axios.post(`${config.baseUrlApi}api/users/register.php`, {
           email: this.email,
           password: this.password,
         });

@@ -74,7 +74,7 @@ import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'AdminView',
@@ -104,10 +104,10 @@ export default {
           groupsResponse,
           documentsResponse,
         ] = await Promise.all([
-          axios.get(`${apiUrl}api/posts/get_allPosts.php`),
-          axios.get(`${apiUrl}api/contacts/get_allContacts.php`),
-          axios.get(`${apiUrl}api/groups/get_allGroups.php`),
-          axios.get(`${apiUrl}api/documents/get_allDocuments.php`),
+          axios.get(`${config.baseUrlApi}/posts/get_allPosts.php`),
+          axios.get(`${config.baseUrlApi}/contacts/get_allContacts.php`),
+          axios.get(`${config.baseUrlApi}/groups/get_allGroups.php`),
+          axios.get(`${config.baseUrlApi}/documents/get_allDocuments.php`),
         ]);
 
         this.posts = postsResponse.data;

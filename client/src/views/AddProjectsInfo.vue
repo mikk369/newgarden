@@ -55,7 +55,7 @@
 <script>
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'AddProjectsInfo',
@@ -82,7 +82,7 @@ export default {
     async fetchProjects() {
       try {
         const response = await axios.get(
-          `${apiUrl}api/projects/get_allProjects.php`,
+          `${config.baseUrlApi}/projects/get_allProjects.php`,
           {
             // withCredentials: true,
           }
@@ -98,7 +98,10 @@ export default {
         formData.append('name', this.name);
         formData.append('project_content', this.project_content);
 
-        await axios.post(`${apiUrl}/projects/add_projects.php`, formData);
+        await axios.post(
+          `${config.baseUrlApi}/projects/add_projects.php`,
+          formData
+        );
         this.name = '';
         this.project_content = '';
       } catch (error) {

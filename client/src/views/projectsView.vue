@@ -27,7 +27,7 @@
 
 <script>
 import axios from 'axios';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'Projects',
@@ -38,7 +38,7 @@ export default {
   },
   async created() {
     const response = await axios.get(
-      `${apiUrl}api/projects/get_allProjects.php`
+      `${config.baseUrlApi}/projects/get_allProjects.php`
     );
     this.projects = response.data;
   },

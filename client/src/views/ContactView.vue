@@ -31,7 +31,7 @@
 
 <script scoped>
 import axios from 'axios';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'ContactView',
@@ -42,7 +42,7 @@ export default {
   },
   async created() {
     const response = await axios.get(
-      `${apiUrl}api/contacts/get_allContacts.php`
+      `${config.baseUrlApi}/contacts/get_allContacts.php`
     );
     this.contacts = response.data;
   },

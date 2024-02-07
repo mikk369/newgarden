@@ -75,7 +75,7 @@
 <script>
 import axios from 'axios';
 import SideBar from '../components/SideBar.vue';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'EditTrusteesInfo',
@@ -117,7 +117,7 @@ export default {
         });
         // Send the array of FormData objects to the server
         await axios.post(
-          `${apiUrl}api/trustees/add_trustees.php`,
+          `${config.baseUrlApi}/trustees/add_trustees.php`,
           combinedFormData
         );
         // Reset the name and table_group_name properties for each row
@@ -133,7 +133,7 @@ export default {
     async fetchTrustees() {
       try {
         const response = await axios.get(
-          `${apiUrl}api/trustees/get_allTrustees.php`
+          `${config.baseUrlApi}/trustees/get_allTrustees.php`
         );
         this.trustees = response.data;
       } catch (error) {
@@ -143,7 +143,7 @@ export default {
     async deleteTrustee(trusteeId) {
       try {
         await axios.delete(
-          `${apiUrl}api/trustees/delete_trustee.php?id=${trusteeId}`
+          `${config.baseUrlApi}/trustees/delete_trustee.php?id=${trusteeId}`
         );
         await this.fetchTrustees();
       } catch (error) {
@@ -165,7 +165,7 @@ export default {
           table_group_name: this.editTable_group_name,
         };
         await axios.patch(
-          `${apiUrl}/api/trustees/update_trustee.php?id=${this.id}`,
+          `${config.baseUrlApi}/trustees/update_trustee.php?id=${this.id}`,
           formData
         );
         // fetch contacts after updating

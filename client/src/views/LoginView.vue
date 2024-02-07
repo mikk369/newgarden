@@ -24,7 +24,7 @@
 
 <script>
 import axios from 'axios';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   data() {
@@ -37,7 +37,7 @@ export default {
     async submitLogin() {
       try {
         const response = await axios.post(
-          `${apiUrl}api/users/login.php`,
+          `${config.baseUrlApi}/users/login.php`,
           {
             email: this.email,
             password: this.password,

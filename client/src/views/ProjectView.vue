@@ -15,7 +15,7 @@
 
 <script>
 import axios from 'axios';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+import config from './../config.js';
 
 export default {
   name: 'project',
@@ -34,7 +34,7 @@ export default {
     async fetchPost() {
       try {
         const response = await axios.get(
-          `${apiUrl}api/projects/get_project.php?id=${this.id}`
+          `${config.baseUrlApi}/projects/get_project.php?id=${this.id}`
         );
         (this.name = response.data.name),
           (this.project_content = response.data.project_content);
