@@ -1,4 +1,6 @@
 <?php
+require_once("../config.php");
+
 // Add CORS headers
 header("Access-Control-Allow-Origin: * ");
 header("Access-Control-Allow-Methods: * ");
@@ -6,6 +8,9 @@ header("Access-Control-Allow-Headers: * ");
 
 // Get db connection
 require_once '../../db/db_connect.php';
+
+// Set the character set for the database connection
+mysqli_set_charset($connection, "utf8mb4");
 
 // Construct the SQL query using a prepared statement
 $query = "SELECT * FROM trustees";
@@ -27,7 +32,18 @@ $resultSet = mysqli_stmt_get_result($stmt);
 $data = mysqli_fetch_all($resultSet, MYSQLI_ASSOC);
 
 // Encode the result directly to JSON and echo it
-echo json_encode($data);
+$jsonData = json_encode($data);
+
+if($jsonData === false) {
+    $jsonData = json_last_error_msg();
+    die("JSON encoding error: $jsonData");
+}
+
+// Set proper header for JSON output
+header('Content-Type: application/json');
+
+// Echo the JSON data
+echo $jsonData;
 
 // Close statement
 mysqli_stmt_close($stmt);
