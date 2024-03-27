@@ -139,10 +139,6 @@ router.beforeEach(async (to, from, next) => {
   // Check if the route requires authentication
   if (to.matched.some((record) => record.meta.requiredAuth)) {
     try {
-      // Check if PHPSESSID cookie is present
-      const hasSessionCookie = document.cookie
-        .split(';')
-        .some((c) => c.trim().startsWith('PHPSESSID='));
       // Make a request to your session.php endpoint to check if the user is logged in
       const response = await axios.get(
         `${config.baseUrlApi}/users/session.php`,
@@ -151,7 +147,7 @@ router.beforeEach(async (to, from, next) => {
       const { loggedIn } = response.data;
 
       // Check if the user is logged in
-      if (loggedIn && hasSessionCookie) {
+      if (loggedIn) {
         next();
       } else {
         // User is not authenticated, redirect to login or another page

@@ -1,8 +1,10 @@
 <?php
+
+require_once("../config.php");
 // Start the session
 session_start();
 
-header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Origin: " . CORS_URL);
 // Destroy the session
 session_destroy();
 
